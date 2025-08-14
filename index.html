@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREST.PET - Modern Pet Care</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Cabinet Grotesk & Clash Display -->
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&f[]=clash-display@700,600,500&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.294.0/lucide.min.js"></script>
+    <!-- For confetti effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+    <!-- GSAP for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        /* Custom Fonts */
+        @import url('https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&f[]=cabinet-grotesk@700,600,500&display=swap');
+
+        /* Custom styles not covered by Tailwind */
+        :root {
+            --hero-purple: #6B46C1;
+            --hero-purple-light: #8B5CF6;
+            --trust-blue: #3B82F6;
+            --alert-red: #EF4444;
+            --success-green: #10B981;
+            --dark-text: #0F172A;
+            --light-bg: #F8FAFC;
+            --grain: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.02'/%3E%3C/svg%3E");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'DM Sans', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Clash Display', 'Cabinet Grotesk', sans-serif;
+        }
+
+        .accent-font {
+            font-family: 'Space Grotesk', monospace;
+        }
+
+        /* Gradient Mesh Background */
+        .gradient-mesh {
+            background-image:
+                radial-gradient(at 40% 20%, hsla(280, 60%, 70%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, hsla(240, 60%, 70%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, hsla(340, 60%, 70%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 80% 50%, hsla(200, 60%, 70%, 0.3) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(280, 60%, 70%, 0.2) 0px, transparent 50%),
+                var(--grain);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--hero-purple), var(--hero-purple-light), var(--trust-blue));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Glassmorphism */
+        .glassmorphic {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        }
+
+        /* Glass */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+        }
+
+        /* Neo-brutalism */
+        .neo-brutal {
+            border: 3px solid var(--dark-text);
+            box-shadow: 6px 6px 0 0 var(--dark-text);
+            border-radius: 12px;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .neo-brutal:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0 0 var(--dark-text);
+        }
+
+        /* Animations */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(3deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeInDelay1 {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            20% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeInDelay2 {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            40% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeInDelay3 {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            60% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(5px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-delay-1 {
+            animation-delay: 0.5s;
+        }
+
+        .float-delay-2 {
+            animation-delay: 1s;
+        }
+
+        .float-delay-3 {
+            animation-delay: 1.5s;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .fade-in-delay-1 {
+            opacity: 0;
+            animation: fadeInDelay1 1.5s ease forwards;
+        }
+
+        .fade-in-delay-2 {
+            opacity: 0;
+            animation: fadeInDelay2 2s ease forwards;
+        }
+
+        .fade-in-delay-3 {
+            opacity: 0;
+            animation: fadeInDelay3 2.5s ease forwards;
+        }
+
+        .typing-cursor {
+            border-right: 3px solid var(--dark-text);
+            animation: pulse 1s infinite;
+            padding-left: 2px;
+        }
+
+        /* Button hover effects */
+        .primary-btn {
+            background: linear-gradient(135deg, var(--hero-purple), var(--hero-purple-light));
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.5);
+        }
+
+        .primary-btn:hover::before {
+            opacity: 1;
+        }
+
+        .secondary-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secondary-btn:hover {
+            transform: scale(1.05);
+            background-color: rgba(107, 70, 193, 0.1);
+        }
+
+        /* Magnetic Button Effect */
+        .magnetic-btn {
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* For parallax effect */
+        .parallax {
+            transition: transform 0.15s ease-out;
+        }
+
+        /* Bento grid layout */
+        .bento-grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+        }
+
+        .bento-item-large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-item-wide {
+            grid-column: span 2;
+        }
+
+        .bento-item-tall {
+            grid-row: span 2;
+        }
+
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bento-item-large {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-item-large,
+            .bento-item-wide,
+            .bento-item-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        /* Bento grid layout - Alternative from index1.html */
+        .bento-grid-alt {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 24px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1023px) {
+            .bento-grid-alt {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, auto);
+            }
+        }
+
+        @media (max-width: 639px) {
+            .bento-grid-alt {
+                display: none;
+            }
+        }
+
+        /* Card sizes */
+        .card-2x2 {
+            grid-column: span 2;
+            grid-row: span 2;
+            min-height: 360px;
+        }
+
+        .card-2x1 {
+            grid-column: span 2;
+            grid-row: span 1;
+            min-height: 180px;
+        }
+
+        .card-1x2 {
+            grid-column: span 1;
+            grid-row: span 2;
+            min-height: 360px;
+        }
+
+        .card-1x1 {
+            grid-column: span 1;
+            grid-row: span 1;
+            min-height: 180px;
+        }
+
+        @media (max-width: 1023px) {
+
+            .card-2x2,
+            .card-2x1,
+            .card-1x2 {
+                grid-column: span 2;
+                min-height: 250px;
+            }
+        }
+
+        /* Card styling */
+        .card {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        /* Card hover effect with toned down darkness */
+        .card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover::before {
+            opacity: 0.7;
+            /* Toned down from 1 to 0.7 */
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, var(--hero-purple), var(--hero-purple-light), var(--trust-blue));
+            z-index: -1;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(12px);
+        }
+
+        /* Counters */
+        .counter {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 700;
+        }
+
+        /* Typing Animation */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--hero-purple);
+            animation: typing 3s steps(40), blink 0.8s infinite;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--hero-purple);
+            }
+        }
+
+        /* Calendar animations */
+        @keyframes calendarHighlight {
+            0% {
+                background-color: rgba(139, 92, 246, 0.2);
+            }
+
+            50% {
+                background-color: rgba(139, 92, 246, 0.4);
+            }
+
+            100% {
+                background-color: rgba(139, 92, 246, 0.2);
+            }
+        }
+
+        .calendar-highlight {
+            animation: calendarHighlight 2s infinite;
+        }
+
+        /* Crossed out animation */
+        @keyframes crossOut {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .cross-out {
+            position: relative;
+        }
+
+        .cross-out::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--alert-red);
+            animation: crossOut 0.8s forwards;
+        }
+
+        /* Mobile carousel */
+        .carousel {
+            display: none;
+        }
+
+        @media (max-width: 639px) {
+            .carousel {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 16px 0;
+            }
+
+            .carousel::-webkit-scrollbar {
+                display: none;
+            }
+
+            .carousel-item {
+                flex: 0 0 auto;
+                width: 85%;
+                scroll-snap-align: center;
+                margin-right: 16px;
+            }
+
+            .carousel-item:last-child {
+                margin-right: 0;
+            }
+        }
+
+        /* Pricing comparison styling */
+        .pricing-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .price-tag {
+            position: absolute;
+            top: 16px;
+            right: -30px;
+            background: var(--alert-red);
+            color: white;
+            padding: 5px 40px;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+
+        /* Progress bar animation */
+        @keyframes fillProgress {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: var(--fill-amount);
+            }
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #E2E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--hero-purple), var(--hero-purple-light));
+            animation: fillProgress 1.5s ease-out forwards;
+        }
+
+        /* Booking flow */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: #E2E8F0;
+            z-index: 0;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 24px;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--hero-purple), var(--hero-purple-light));
+            z-index: 1;
+            transition: width 1.5s ease;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Chat interface */
+        .chat-window {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .message-bubble {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+        }
+
+        .message-user {
+            background-color: #E2E8F0;
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+
+        .message-ai {
+            background-color: rgba(107, 70, 193, 0.1);
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+
+        @keyframes typingDots {
+            0% {
+                opacity: 0.2;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.2;
+            }
+        }
+
+        .typing-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--hero-purple);
+            margin-right: 4px;
+            animation: typingDots 1.5s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 1s;
+            margin-right: 0;
+        }
+
+        /* Trial modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateX(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--hero-purple), var(--hero-purple-light));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--hero-purple-light), var(--trust-blue));
+        }
+
+        /* Spring Animation */
+        @keyframes spring-bounce {
+            0% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(1.2);
+            }
+
+            40% {
+                transform: scale(0.9);
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            80% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .spring {
+            animation: spring-bounce 0.6s ease;
+        }
+
+        /* Chat Bubble */
+        .chat-bubble {
+            padding: 12px 18px;
+            border-radius: 20px;
+            position: relative;
+            margin-bottom: 12px;
+            animation: slide-up 0.4s ease;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease;
+            visibility: hidden;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        /* 3D Card Transformation */
+        .perspective-container {
+            perspective: 1000px;
+        }
+
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .card-angled {
+            transform: rotateY(-10deg) rotateX(5deg);
+        }
+
+        /* New Custom Select Dropdown */
+        .custom-select {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .custom-select-selected {
+            position: relative;
+            padding: 14px 20px;
+            background-color: white;
+            border-radius: 12px;
+            border: 3px solid var(--dark-text);
+            box-shadow: 6px 6px 0 0 var(--dark-text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .custom-select-items {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-radius: 12px;
+            border: 3px solid var(--dark-text);
+            box-shadow: 6px 6px 0 0 var(--dark-text);
+            z-index: 10;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .custom-select-item {
+            padding: 12px 20px;
+            transition: all 0.2s ease;
+        }
+
+        .custom-select-item:hover {
+            background-color: rgba(107, 70, 193, 0.1);
+        }
+
+        .custom-select-item.selected {
+            background-color: rgba(107, 70, 193, 0.2);
+            font-weight: 600;
+        }
+
+        .custom-select-items.show {
+            display: block;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        /* SVG Icons for Trust Badges */
+        .trust-badge-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        /* Notification Animation */
+        @keyframes notification-pop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .notification {
+            animation: notification-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* Enhanced 3D Design Elements */
+        .comparison-container {
+            position: relative;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        .comparison-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .comparison-front {
+            transform: translateZ(40px);
+            z-index: 2;
+        }
+
+        .comparison-back {
+            transform: translateZ(0) translateX(-20px) translateY(-20px);
+            z-index: 1;
+        }
+
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Timeline Step Highlighting Animation */
+        .booking-step {
+            transition: all 0.5s ease;
+        }
+
+        .booking-step.highlight {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(107, 70, 193, 0.3);
+        }
+
+        .booking-step.highlight .step-circle {
+            background-color: var(--hero-purple);
+            color: white;
+        }
+
+        .booking-step.highlight .step-card {
+            background-color: white;
+            opacity: 1;
+        }
+
+        .booking-step.highlight .step-card h3,
+        .booking-step.highlight .step-card p {
+            color: var(--dark-text);
+        }
+
+        .booking-step .step-card .content-container {
+            opacity: 0.5;
+            transition: opacity 0.5s ease;
+        }
+
+        .booking-step.highlight .step-card .content-container {
+            opacity: 1;
+        }
+
+        /* Hero Text Blur Reveal */
+        .blur-reveal {
+            filter: blur(8px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .blur-reveal.active {
+            filter: blur(0);
+            opacity: 1;
+        }
+
+        /* Enhanced Mobile Styles */
+        @media (max-width: 768px) {
+            .hero-content-container {
+                padding: 0 16px;
+            }
+
+            .comparison-container {
+                transform: scale(0.9);
+                margin-top: 30px;
+            }
+
+            .fade-in,
+            .fade-in-delay-1,
+            .fade-in-delay-2,
+            .fade-in-delay-3 {
+                animation-duration: 0.7s;
+            }
+
+            .primary-btn,
+            .neo-brutal {
+                padding: 12px 24px;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hero-purple': '#6B46C1',
+                        'hero-purple-light': '#8B5CF6',
+                        'trust-blue': '#3B82F6',
+                        'alert-red': '#EF4444',
+                        'dark-text': '#0F172A',
+                        'light-bg': '#F8FAFC',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 px-4 py-3">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center h-20 glass rounded-3xl px-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg"></div>
+                    <span class="text-2xl font-bold">CREST.PET</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#features" class="hover:text-purple-600 transition font-medium">Features</a>
+                    <a href="#pricing" class="hover:text-purple-600 transition font-medium">Pricing</a>
+                    <a href="#how" class="hover:text-purple-600 transition font-medium">How it Works</a>
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <button class="hidden md:block hover:text-purple-600 transition font-medium">Login</button>
+                    <button class="primary-btn magnetic-btn py-3 px-6">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-32 gradient-mesh relative overflow-hidden">
+        <!-- Floating Shapes -->
+        <div class="absolute top-20 left-10 w-64 h-64 bg-purple-400/20 rounded-full blur-3xl parallax-element"
+            data-depth="0.2"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl parallax-element"
+            data-depth="0.3"></div>
+        <div class="absolute top-1/2 left-1/2 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl parallax-element"
+            data-depth="0.1"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 hero-content-container">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <!-- Left Content -->
+                <div class="lg:col-span-6 space-y-8">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] blur-reveal" id="hero-title">
+                        Vet care that doesn't make you
+                        <span class="gradient-text">
+                            (or your wallet)
+                        </span>
+                        cry
+                    </h1>
+
+                    <p class="text-xl text-gray-600 blur-reveal" id="hero-subtitle">
+                        <span class="typing inline-block">Save 80% on pet healthcare. No BS.</span>
+                    </p>
+
+                    <div class="flex flex-wrap gap-6 blur-reveal" id="hero-buttons">
+                        <button class="primary-btn group" onclick="handleCTA()">
+                            <span class="flex items-center gap-2">
+                                Start Free Trial
+                                <i data-lucide="sparkles"
+                                    class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
+                            </span>
+                        </button>
+                        <button class="neo-brutal bg-white px-8 py-4 font-semibold hover:bg-purple-50 transition">
+                            See Savings Calculator
+                        </button>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="flex flex-wrap gap-4 blur-reveal" id="hero-badges">
+                        <div class="glass px-6 py-3 rounded-full">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <span class="font-medium">80% Average Savings</span>
+                            </div>
+                        </div>
+                        <div class="glass px-6 py-3 rounded-full">
+                            <div class="flex items-center gap-2">
+                                <svg class="trust-badge-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                        stroke="#6B46C1" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M9 12L11 14L15 10" stroke="#6B46C1" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <span class="font-medium">Vet Verified</span>
+                            </div>
+                        </div>
+                        <div class="glass px-6 py-3 rounded-full">
+                            <div class="flex items-center gap-2">
+                                <svg class="trust-badge-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                                        stroke="#EC4899" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <span class="font-medium">10k+ Happy Pets</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - 3D Angled Comparison -->
+                <div class="lg:col-span-6 relative blur-reveal perspective-container" id="hero-comparison">
+                    <div class="comparison-container w-full h-[500px] md:h-[550px]">
+                        <!-- Traditional Vet Layer (Back) -->
+                        <div class="comparison-layer comparison-back w-full h-full">
+                            <div class="neo-brutal bg-gray-100 p-6 h-full rounded-xl relative">
+                                <!-- Traditional Vet Interface -->
+                                <div class="bg-white rounded-lg p-4 h-full flex flex-col">
+                                    <div class="flex items-center justify-between border-b border-gray-200 pb-4 mb-4">
+                                        <h3 class="font-bold text-gray-700">Traditional Vet</h3>
+                                        <div class="flex items-center gap-2">
+                                            <span
+                                                class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Expensive</span>
+                                            <span
+                                                class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Slow</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Appointment System -->
+                                    <div class="mb-6">
+                                        <h4 class="text-sm font-medium text-gray-600 mb-2">Appointment Booking</h4>
+                                        <div class="bg-gray-100 p-3 rounded-lg">
+                                            <div class="mb-2 flex items-center justify-between">
+                                                <span class="text-sm">Next Available:</span>
+                                                <span class="text-sm font-bold text-red-500">3 days later</span>
+                                            </div>
+                                            <div
+                                                class="bg-gray-200 h-10 rounded flex items-center px-3 text-gray-500 text-sm">
+                                                Call clinic to schedule...
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pricing Info -->
+                                    <div class="mb-6">
+                                        <h4 class="text-sm font-medium text-gray-600 mb-2">Cost Breakdown</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm">Consultation Fee</span>
+                                                <span class="text-sm font-bold text-red-500">$85</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm">Exam Fee</span>
+                                                <span class="text-sm font-bold text-red-500">$65</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm">Treatment Cost</span>
+                                                <span class="text-sm font-bold text-red-500">$120+</span>
+                                            </div>
+                                            <div class="border-t border-gray-200 pt-2 mt-2">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-sm font-medium">Total</span>
+                                                    <span class="text-sm font-bold text-red-500">$270+</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Wait Time -->
+                                    <div class="mt-auto">
+                                        <h4 class="text-sm font-medium text-gray-600 mb-2">Wait Time</h4>
+                                        <div class="bg-gray-100 p-3 rounded-lg">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <svg class="w-4 h-4 text-red-500 mr-1" viewBox="0 0 24 24"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="12" cy="12" r="10" stroke="currentColor"
+                                                            stroke-width="2" />
+                                                        <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" />
+                                                    </svg>
+                                                    <span class="text-sm font-medium">Average Wait:</span>
+                                                </div>
+                                                <span class="text-sm font-bold text-red-500">3+ hours</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 h-2 rounded-full mt-2">
+                                                <div class="bg-red-500 h-2 rounded-full" style="width: 80%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CREST.PET Layer (Front) -->
+                        <div class="comparison-layer comparison-front w-full h-full card-3d card-angled">
+                            <div
+                                class="neo-brutal bg-gradient-to-br from-purple-50 to-blue-50 p-6 h-full rounded-xl relative">
+                                <!-- CREST.PET Interface -->
+                                <div class="bg-white rounded-lg p-4 h-full flex flex-col">
+                                    <div class="flex items-center justify-between border-b border-gray-200 pb-4 mb-4">
+                                        <h3 class="font-bold gradient-text">CREST.PET</h3>
+                                        <div class="flex items-center gap-2">
+                                            <span
+                                                class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Affordable</span>
+                                            <span
+                                                class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Instant</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- AI Chat Interface -->
+                                    <div class="mb-6">
+                                        <h4 class="text-sm font-medium text-purple-600 mb-2">24/7 AI Vet Chat</h4>
+                                        <div class="bg-gray-50 p-3 rounded-lg">
+                                            <div class="flex flex-col space-y-2">
+                                                <div class="chat-bubble bg-gray-100 self-end max-w-[80%] text-sm">
+                                                    My cat has been sneezing a lot lately
+                                                </div>
+                                                <div class="chat-bubble bg-purple-100 self-start max-w-[80%] text-sm">
+                                                    It could be an upper respiratory infection. Would you like me to
+                                                    check for available appointments?
+                                                </div>
+                                            </div>
+                                            <div class="flex mt-2">
+                                                <input type="text" placeholder="Ask anything..."
+                                                    class="flex-1 text-sm p-2 rounded-l-lg border border-gray-200">
+                                                <button class="bg-purple-600 text-white p-2 rounded-r-lg">
+                                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pricing Info -->
+                                    <div class="mb-6">
+                                        <h4 class="text-sm font-medium text-purple-600 mb-2">Cost Breakdown</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm">Consultation Fee</span>
+                                                <span class="text-sm font-bold text-green-500">$15</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm">Exam Fee</span>
+                                                <span class="text-sm font-bold text-green-500">$0</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm">Treatment Cost</span>
+                                                <span class="text-sm font-bold text-green-500">$40</span>
+                                            </div>
+                                            <div class="border-t border-gray-200 pt-2 mt-2">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-sm font-medium">Total</span>
+                                                    <span class="text-sm font-bold text-green-500">$55</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Wait Time -->
+                                    <div class="mt-auto">
+                                        <h4 class="text-sm font-medium text-purple-600 mb-2">Wait Time</h4>
+                                        <div class="bg-gray-50 p-3 rounded-lg">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <svg class="w-4 h-4 text-green-500 mr-1" viewBox="0 0 24 24"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="12" cy="12" r="10" stroke="currentColor"
+                                                            stroke-width="2" />
+                                                        <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" />
+                                                    </svg>
+                                                    <span class="text-sm font-medium">Average Wait:</span>
+                                                </div>
+                                                <span class="text-sm font-bold text-green-500">Instant</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 h-2 rounded-full mt-2">
+                                                <div class="bg-green-500 h-2 rounded-full" style="width: 5%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Floating Savings Badge -->
+                                <div
+                                    class="absolute -bottom-4 -right-4 bg-green-500 text-white rounded-full w-24 h-24 flex items-center justify-center font-bold text-xl neo-brutal notification">
+                                    Save 80%
+                                </div>
+
+                                <!-- Notification Popup -->
+                                <div class="absolute top-4 -right-8 bg-white p-3 rounded-lg shadow-lg neo-brutal notification"
+                                    style="animation-delay: 0.5s;">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="none">
+                                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs font-medium">Available today!</p>
+                                            <p class="text-xs text-gray-500">Book in seconds</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Props - Bento Grid -->
+    <section id="features" class="py-20 px-6 lg:px-16 bg-gradient-to-b from-[#F8FAFC] to-[#EDF2F7]">
+        <div class="text-center mb-12 reveal">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">Why pet parents <span class="text-[#6B46C1]">love us</span>
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">We reimagined pet care from the ground up. No more
+                waiting rooms, surprise bills, or confusing plans.</p>
+        </div>
+
+        <!-- Bento Grid Layout for larger screens -->
+        <div class="bento-grid-alt reveal">
+            <!-- 80% Cheaper Card (2x2) -->
+            <div class="card-2x2">
+                <div class="card neo-brutal bg-white rounded-xl p-8 h-full relative">
+                    <div class="absolute top-6 right-6">
+                        <i data-lucide="dollar-sign" class="w-10 h-10 text-[#EF4444]"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-2">80% Cheaper</h3>
+                    <p class="text-gray-600 mb-8 text-lg">Than traditional vet visits, no joke</p>
+                    <div class="flex items-end">
+                        <span class="counter text-8xl font-bold text-[#EF4444]" id="counter">80</span>
+                        <span class="text-4xl font-bold ml-2">%</span>
+                    </div>
+                    <p class="mt-6 text-gray-500">Average savings across all services</p>
+                    <button class="mt-8 px-6 py-3 bg-[#EF4444]/10 text-[#EF4444] font-semibold rounded-lg">See price
+                        comparison</button>
+                </div>
+            </div>
+
+            <!-- 24/7 AI Vet Card (1x2) -->
+            <div class="card-1x2">
+                <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
+                    <div class="absolute top-4 right-4">
+                        <i data-lucide="message-circle" class="w-8 h-8 text-purple-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">24/7 AI Vet</h3>
+                    <p class="text-gray-600 mb-4">Chat anytime, get answers instantly</p>
+
+                    <!-- Live Chat Demo -->
+                    <div class="bg-white rounded-lg p-4 shadow-inner" style="max-height: 250px; overflow-y: auto;">
+                        <div class="space-y-3">
+                            <!-- User question -->
+                            <div class="chat-bubble bg-gray-100 max-w-[70%] ml-auto">
+                                Is it normal for my dog to sleep 14 hours?
+                            </div>
+
+                            <!-- AI response -->
+                            <div class="chat-bubble bg-purple-100 max-w-[70%]">
+                                Yes, that's perfectly normal! Adult dogs sleep 12-14 hours a day. Puppies and seniors
+                                may sleep even more. 😊
+                            </div>
+
+                            <!-- User typing animation -->
+                            <div class="chat-bubble bg-gray-100 max-w-[70%] ml-auto flex items-center">
+                                <div class="typing-indicator flex gap-1">
+                                    <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
+                                    <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                        style="animation-delay: 0.1s;"></span>
+                                    <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                        style="animation-delay: 0.2s;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instant Booking Card (1x1) -->
+            <div class="card-1x1">
+                <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
+                    <div class="absolute top-4 right-4">
+                        <i data-lucide="calendar" class="w-8 h-8 text-[#3B82F6]"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Instant Booking</h3>
+                    <p class="text-gray-600 mb-4">No waiting, book in seconds</p>
+                    <div class="grid grid-cols-7 gap-1 text-center text-sm">
+                        <div class="font-bold">S</div>
+                        <div class="font-bold">M</div>
+                        <div class="font-bold">T</div>
+                        <div class="font-bold">W</div>
+                        <div class="font-bold">T</div>
+                        <div class="font-bold">F</div>
+                        <div class="font-bold">S</div>
+
+                        <div class="text-gray-400">1</div>
+                        <div class="text-gray-400">2</div>
+                        <div class="text-gray-400">3</div>
+                        <div class="text-gray-400">4</div>
+                        <div class="text-gray-400">5</div>
+                        <div>6</div>
+                        <div>7</div>
+
+                        <div>8</div>
+                        <div>9</div>
+                        <div>10</div>
+                        <div id="calendar-day"
+                            class="calendar-highlight rounded-full w-6 h-6 flex items-center justify-center mx-auto font-bold text-[#6B46C1]">
+                            11</div>
+                        <div>12</div>
+                        <div>13</div>
+                        <div>14</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Membership BS Card (1x1) -->
+            <div class="card-1x1">
+                <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
+                    <div class="absolute top-4 right-4">
+                        <i data-lucide="x" class="w-8 h-8 text-[#EF4444]"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">No Membership BS</h3>
+                    <p class="text-gray-600 mb-4">Pay only for what you need</p>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center justify-between">
+                            <span>Monthly Fee</span>
+                            <span class="cross-out font-bold">$49.99</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span>Annual Contract</span>
+                            <span class="cross-out font-bold">Required</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span>Hidden Fees</span>
+                            <span class="cross-out font-bold">Many</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center p-2 bg-[#EF4444]/10 rounded-lg font-medium text-[#EF4444]">
+                        Zero commitments
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Carousel (visible on small screens only) -->
+        <div class="carousel">
+            <!-- 80% Cheaper Card -->
+            <div class="carousel-item">
+                <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
+                    <div class="absolute top-4 right-4">
+                        <i data-lucide="dollar-sign" class="w-8 h-8 text-[#EF4444]"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">80% Cheaper</h3>
+                    <p class="text-gray-600 mb-6">Than traditional vet visits, no joke</p>
+                    <div class="flex items-end">
+                        <span class="counter text-6xl font-bold text-[#EF4444]" id="counter-mobile">80</span>
+                        <span class="text-2xl font-bold ml-1">%</span>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500">Average savings across all services</p>
+                </div>
+            </div>
+
+            <!-- 24/7 AI Vet Card -->
+            <div class="carousel-item">
+                <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
+                    <div class="absolute top-4 right-4">
+                        <i data-lucide="message-circle" class="w-8 h-8 text-[#3B82F6]"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">24/7 AI Vet</h3>
+                    <p class="text-gray-600 mb-4">Chat anytime, get answers instantly</p>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <div class="flex items-start gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0"></div>
+                            <div>
+                                <div class="bg-white px-3 py-2 rounded-lg text-sm">
+                                    Is it normal for my dog to sleep so much?
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-[#6B46C1] flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">
+                                AI</div>
+                            <div>
+                                <div id="typing-response-mobile" class="bg-[#6B46C1]/10 px-3 py-2 rounded-lg text-sm">
+                                    Yes, it's normal for dogs to sleep 12-14 hours a day.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instant Booking Card -->
+            <div class="carousel-item">
+                <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
+                    <div class="absolute top-4 right-4">
+                        <i data-lucide="calendar" class="w-8 h-8 text-[#3B82F6]"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Instant Booking</h3>
+                    <p class="text-gray-600 mb-4">No waiting, book in seconds</p>
+                    <div class="grid grid-cols-7 gap-2 text-center text-sm">
+                        <div class="font-bold">S</div>
+                        <div class="font-bold">M</div>
+                        <div class="font-bold">T</div>
+                        <div class="font-bold">W</div>
+                        <div class="font-bold">T</div>
+                        <div class="font-bold">F</div>
+                        <div class="font-bold">S</div>
+
+                        <div class="text-gray-400">1</div>
+                        <div class="text-gray-400">2</div>
+                        <div class="text-gray-400">3</div>
+                        <div class="text-gray-400">4</div>
+                        <div class="text-gray-400">5</div>
+                        <div>6</div>
+                        <div>7</div>
+
+                        <div>8</div>
+                        <div>9</div>
+                        <div>10</div>
+                        <div id="calendar-day-mobile"
+                            class="calendar-highlight rounded-full w-6 h-6 flex items-center justify-center mx-auto font-bold text-[#6B46C1]">
+                            11</div>
+                        <div>12</div>
+                        <div>13</div>
+                        <div>14</div>
+                    </div>
+                    <div class="mt-4 text-center p-2 bg-[#6B46C1]/10 rounded-lg font-medium text-[#6B46C1]">
+                        4 slots available today
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Membership BS Card -->
+            <div class="carousel-item">
+                <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
+                    <div class="absolute top-4 right-4">
+                        <i data-lucide="x" class="w-8 h-8 text-[#EF4444]"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">No Membership BS</h3>
+                    <p class="text-gray-600 mb-4">Pay only for what you need</p>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center justify-between">
+                            <span>Monthly Fee</span>
+                            <span class="cross-out font-bold">$49.99</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span>Annual Contract</span>
+                            <span class="cross-out font-bold">Required</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span>Hidden Fees</span>
+                            <span class="cross-out font-bold">Many</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center p-2 bg-[#EF4444]/10 rounded-lg font-medium text-[#EF4444]">
+                        Zero commitments
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Preview -->
+    <section class="py-20 gradient-mesh relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Meet your <span class="gradient-text">AI vet assistant</span>
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Get instant answers, diagnosis hints, and treatment options 24/7
+                </p>
+            </div>
+
+            <div class="neo-brutal bg-white p-8 reveal">
+                <!-- Chat Header -->
+                <div class="flex items-center justify-between pb-4 border-b">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold">AI</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">CREST AI Vet</h4>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                <span class="text-sm text-green-500">Online</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="p-2 hover:bg-gray-100 rounded-lg transition">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                        </button>
+                        <button class="p-2 hover:bg-gray-100 rounded-lg transition">
+                            <i data-lucide="video" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div class="py-6 space-y-4 max-h-[400px] overflow-y-auto custom-scrollbar" id="chat-messages">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex-shrink-0">
+                        </div>
+                        <div class="chat-bubble bg-purple-50 max-w-[70%]">
+                            👋 Hi! I'm your AI vet assistant. How can I help with your pet today?
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 justify-end">
+                        <div class="chat-bubble bg-gray-100 max-w-[70%]">
+                            My cat has been sneezing a lot lately. Should I be worried?
+                        </div>
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0"></div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex-shrink-0">
+                        </div>
+                        <div class="chat-bubble bg-purple-50 max-w-[70%]">
+                            <p>Occasional sneezing is normal, but frequent sneezing could indicate:</p>
+                            <ul class="mt-2 ml-4 list-disc space-y-1">
+                                <li>Upper respiratory infection (most common)</li>
+                                <li>Allergies to dust or pollen</li>
+                                <li>Foreign object in nasal passage</li>
+                            </ul>
+                            <p class="mt-2">I'd recommend monitoring for other symptoms. Would you like to book a quick
+                                video consultation? <strong>It's only $25 vs $150 at a traditional vet.</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="flex gap-2 pt-4 border-t">
+                    <input type="text" placeholder="Ask anything about your pet..."
+                        class="flex-1 px-4 py-3 bg-gray-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <button class="primary-btn px-6">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button class="text-center mt-8">
+                <a href="#" class="primary-btn mx-auto inline-block" onclick="handleCTA()">
+                    Try it free for 30 days
+                </a>
+            </button>
+        </div>
+    </section>
+
+    <!-- Pricing Comparison -->
+    <section id="pricing" class="py-20 px-6 lg:px-16 bg-gradient-to-b from-[#F8FAFC] to-[#EDF2F7]">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">The price difference is <span
+                    class="gradient-text">shocking</span></h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">See real pricing comparisons</p>
+        </div>
+
+        <div class="max-w-5xl mx-auto reveal">
+            <div class="mb-8">
+                <label for="procedure-dropdown" class="block text-lg font-medium mb-2">Select a procedure:</label>
+                <!-- Custom Select Dropdown -->
+                <div class="custom-select" id="custom-select">
+                    <div class="custom-select-selected" id="custom-select-selected">
+                        <span>Routine Check-up</span>
+                        <svg class="w-5 h-5 text-purple-600" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="custom-select-items" id="custom-select-items">
+                        <div class="custom-select-item selected" data-value="checkup">Routine Check-up</div>
+                        <div class="custom-select-item" data-value="vaccines">Annual Vaccines</div>
+                        <div class="custom-select-item" data-value="dental">Dental Cleaning</div>
+                        <div class="custom-select-item" data-value="emergency">Emergency Visit</div>
+                        <div class="custom-select-item" data-value="surgery">Minor Surgery</div>
+                    </div>
+                </div>
+                <!-- Hidden Native Select for Accessibility -->
+                <select id="procedure-dropdown" class="hidden">
+                    <option value="checkup" selected>Routine Check-up</option>
+                    <option value="vaccines">Annual Vaccines</option>
+                    <option value="dental">Dental Cleaning</option>
+                    <option value="emergency">Emergency Visit</option>
+                    <option value="surgery">Minor Surgery</option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Traditional Vet Card -->
+                <div class="pricing-card neo-brutal bg-white rounded-xl p-8 relative">
+                    <h3 class="text-2xl font-bold mb-6">Them 😴</h3>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Base Visit</span>
+                            <span class="font-bold">$85</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="--fill-amount: 40%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Exam Fee</span>
+                            <span class="font-bold">$65</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="--fill-amount: 30%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Service Cost</span>
+                            <span class="font-bold">$120</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="--fill-amount: 60%"></div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-6 mt-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-medium">Total Cost</span>
+                            <span class="text-3xl font-bold">$270</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CREST.PET Card -->
+                <div class="pricing-card neo-brutal bg-white rounded-xl p-8 relative overflow-hidden">
+                    <div class="price-tag">SAVE 80%</div>
+
+                    <h3 class="text-2xl font-bold mb-6">Us 🥰</h3>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Base Visit</span>
+                            <span class="font-bold text-green-600">$15</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="--fill-amount: 7%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Exam Fee</span>
+                            <span class="font-bold text-green-600">$0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="--fill-amount: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Service Cost</span>
+                            <span class="font-bold text-green-600">$40</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="--fill-amount: 20%"></div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-6 mt-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xl font-medium">Total Cost</span>
+                            <span class="text-3xl font-bold text-[#EF4444]">$55</span>
+                        </div>
+                        <div class="bg-[#EF4444]/10 p-3 rounded-lg text-center">
+                            <span class="font-bold text-[#EF4444]">You save $215 (80%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Annual Savings Counter -->
+            <div class="text-center mt-16 p-8 neo-brutal bg-gradient-to-br from-purple-50 to-blue-50">
+                <p class="text-xl mb-4">Your estimated annual savings:</p>
+                <div class="text-6xl font-bold gradient-text counter-savings">
+                    $2,400
+                </div>
+                <p class="text-gray-600 mt-4">Based on average pet owner with 4 visits per year</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="py-20 px-6 lg:px-16 gradient-mesh">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Book in <span class="gradient-text">60 seconds</span>
+                </h2>
+                <p class="text-xl text-gray-600">No phone calls. No waiting. No stress.</p>
+            </div>
+
+            <div class="timeline relative mb-16 reveal">
+                <div class="timeline-progress" id="timeline-progress" style="width: 0%"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Step 1 -->
+                    <div class="timeline-step booking-step" id="booking-step-1">
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="w-12 h-12 rounded-full bg-[#6B46C1] flex items-center justify-center text-white text-xl font-bold mb-4 relative z-10 step-circle">
+                                1</div>
+                            <div class="card neo-brutal bg-white rounded-xl p-6 w-full step-card">
+                                <div class="content-container">
+                                    <h3 class="text-xl font-bold mb-3">Tell us what's wrong</h3>
+                                    <p class="text-gray-600 mb-4">Describe your pet's symptoms or the care they need.
+                                    </p>
+                                    <div class="bg-gray-100 p-3 rounded-lg">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                                            <span class="text-gray-400">Search symptoms...</span>
+                                        </div>
+                                        <div class="flex flex-wrap gap-2 mt-3">
+                                            <span
+                                                class="px-3 py-1 bg-[#6B46C1]/10 text-[#6B46C1] rounded-full text-sm">Vomiting</span>
+                                            <span
+                                                class="px-3 py-1 bg-[#6B46C1]/10 text-[#6B46C1] rounded-full text-sm">Lethargy</span>
+                                            <span
+                                                class="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm">+
+                                                Add more</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="timeline-step booking-step" id="booking-step-2">
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xl font-bold mb-4 relative z-10 step-circle">
+                                2</div>
+                            <div class="card neo-brutal bg-white/50 rounded-xl p-6 w-full step-card">
+                                <div class="content-container">
+                                    <h3 class="text-xl font-bold mb-3 text-gray-400">Choose appointment time</h3>
+                                    <p class="text-gray-400 mb-4">Select a date and time that works for you.</p>
+                                    <div class="grid grid-cols-3 gap-2 text-center">
+                                        <div class="p-2 border border-gray-200 rounded-lg">
+                                            <div class="font-bold">Today</div>
+                                            <div class="text-sm text-gray-500">Aug 13</div>
+                                            <div class="text-xs text-[#6B46C1] mt-1">4 slots</div>
+                                        </div>
+                                        <div class="p-2 border border-gray-200 rounded-lg">
+                                            <div class="font-bold">Tomorrow</div>
+                                            <div class="text-sm text-gray-500">Aug 14</div>
+                                            <div class="text-xs text-[#6B46C1] mt-1">7 slots</div>
+                                        </div>
+                                        <div class="p-2 border border-gray-200 rounded-lg">
+                                            <div class="font-bold">Friday</div>
+                                            <div class="text-sm text-gray-500">Aug 15</div>
+                                            <div class="text-xs text-[#6B46C1] mt-1">9 slots</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="timeline-step booking-step" id="booking-step-3">
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xl font-bold mb-4 relative z-10 step-circle">
+                                3</div>
+                            <div class="card neo-brutal bg-white/50 rounded-xl p-6 w-full step-card">
+                                <div class="content-container">
+                                    <h3 class="text-xl font-bold mb-3 text-gray-400">Confirm and pay</h3>
+                                    <p class="text-gray-400 mb-4">Secure your spot with a small deposit.</p>
+                                    <div
+                                        class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                        <span>Deposit</span>
+                                        <span class="font-bold">$15</span>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button
+                                            class="w-full py-3 bg-gray-200 text-gray-400 rounded-lg font-semibold">Confirm
+                                            Booking</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <button
+                    class="primary-btn glassmorphic px-8 py-4 rounded-xl bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white font-semibold flex items-center gap-2 text-lg mx-auto">
+                    Find care near you
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Join <span class="gradient-text">10,000+</span> happy pet parents
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
+                <div class="neo-brutal bg-white p-6">
+                    <div class="flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200" alt="Customer"
+                            class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold">Alex Chen</span>
+                                <div class="flex text-yellow-400">
+                                    ★★★★★
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"Saved $300 on my dog's dental cleaning. The vet was amazing and
+                                the whole process took 5 minutes to book."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neo-brutal bg-white p-6">
+                    <div class="flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200" alt="Customer"
+                            class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold">Sarah Johnson</span>
+                                <div class="flex text-yellow-400">
+                                    ★★★★★
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"The AI vet chat saved my cat's life. Got immediate advice at 2 AM
+                                and booked an emergency visit for the morning."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Happy Pets Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+                <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400" alt="Happy dog"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1592754862816-1a21a4ea2281?w=400" alt="Happy cat"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400" alt="Happy dog"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1514984879728-be0aff75a6e8?w=400" alt="Happy cat"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+            </div>
+        </div>
+    </section>
+
+    <!-- Trial Signup Section -->
+    <section class="py-20 px-6 lg:px-16 bg-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to try the future of pet care?</h2>
+                    <p class="text-xl text-gray-600 mb-8">Join 10,000+ pet parents already saving money and getting
+                        better
+                        care for their furry friends.</p>
+
+                    <div class="flex flex-col space-y-4 mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-600"></i>
+                            </div>
+                            <span>30-day free trial, cancel anytime</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-600"></i>
+                            </div>
+                            <span>No credit card required</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-600"></i>
+                            </div>
+                            <span>Full access to AI vet chat</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-600"></i>
+                            </div>
+                            <span>Discounted in-person visits</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="flex -space-x-4">
+                            <div
+                                class="w-12 h-12 rounded-full border-2 border-white bg-purple-600 flex items-center justify-center font-bold text-white">
+                                JD</div>
+                            <div
+                                class="w-12 h-12 rounded-full border-2 border-white bg-purple-600 flex items-center justify-center font-bold text-white">
+                                KL</div>
+                            <div class="w-12 h-12 rounded-full border-2 border-white bg-purple-600 flex items-center justify-center font-bold text-white">
+                                MR</div>
+                            <div
+                                class="w-12 h-12 rounded-full border-2 border-white bg-purple-600 flex items-center justify-center font-bold text-white">
+                                +</div>
+                        </div>
+                        <div>
+                            <div class="font-medium">247 pet parents joined today</div>
+                            <div class="text-sm text-gray-500">Don't miss out!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neo-brutal bg-white rounded-xl p-8 text-[#0F172A]">
+                    <h3 class="text-2xl font-bold mb-6">Start your free trial</h3>
+
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Your name</label>
+                            <input type="text"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-500 transition"
+                                placeholder="John Doe">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Email address</label>
+                            <input type="email"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-500 transition"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Pet's name</label>
+                            <input type="text"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1] focus:ring-2 focus:ring-purple-500 transition"
+                                placeholder="Fluffy">
+                        </div>
+
+                        <button type="button"
+                            class="w-full py-4 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white rounded-lg font-semibold">
+                            Start Free Trial
+                        </button>
+
+                        <div class="text-center mt-4 text-sm text-gray-500">
+                            By signing up, you agree to our Terms and Privacy Policy
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-mesh relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10 reveal">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6 blur-reveal" id="cta-title">
+                Ready to save on pet care?
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 blur-reveal" id="cta-subtitle">
+                30-day free trial. No credit card required. Cancel anytime.
+            </p>
+
+            <button class="primary-btn text-lg px-12 py-5 mb-8 blur-reveal" id="cta-button" onclick="handleCTA()">
+                Start Your Free Trial
+            </button>
+
+            <div class="flex justify-center items-center gap-6 blur-reveal" id="cta-badges">
+                <div class="flex -space-x-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-purple-500 border-2 border-white flex items-center justify-center text-white font-bold">
+                        JD
+                    </div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-white font-bold">
+                        SK
+                    </div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-pink-500 border-2 border-white flex items-center justify-center text-white font-bold">
+                        AT
+                    </div>
+                </div>
+                <span class="text-gray-600">Join 247 pet parents who signed up today</span>
+            </div>
+        </div>
+
+        <!-- Background decoration -->
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 lg:px-16 bg-[#0F172A] text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="md:col-span-1">
+                    <h3 class="text-2xl font-bold gradient-text mb-6">CREST.PET</h3>
+                    <p class="text-gray-400 mb-6">Modern pet care for the digital age. Save money, save time, love your
+                        pet.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Online
+                                Consultations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">In-Person Visits</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">AI Vet Chat</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Medication Delivery</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pet Insurance</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">HIPAA Compliance</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 mb-4 md:mb-0">
+                    &copy; 2025 CREST.PET. All rights reserved.
+                </div>
+                <div class="flex items-center">
+                    <img src="https://via.placeholder.com/40x25" alt="Visa" class="h-6 mr-2">
+                    <img src="https://via.placeholder.com/40x25" alt="Mastercard" class="h-6 mr-2">
+                    <img src="https://via.placeholder.com/40x25" alt="Amex" class="h-6 mr-2">
+                    <img src="https://via.placeholder.com/40x25" alt="PayPal" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Trial Signup Modal (Initially hidden) -->
+    <div class="modal-overlay" id="signup-modal">
+        <div class="modal-content p-0">
+            <div class="flex flex-col md:flex-row">
+                <div
+                    class="bg-gradient-to-br from-[#6B46C1] to-[#8B5CF6] p-8 text-white md:w-2/5 rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
+                    <button class="mb-6 md:hidden" id="close-modal-mobile">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+
+                    <h3 class="text-2xl font-bold mb-6">Why pet parents love us</h3>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">80% Lower Costs</h4>
+                                <p class="opacity-80 text-sm">Save hundreds on routine and emergency care</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">24/7 AI Vet Support</h4>
+                                <p class="opacity-80 text-sm">Get answers anytime, day or night</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">No Contracts or Hidden Fees</h4>
+                                <p class="opacity-80 text-sm">Cancel anytime, no questions asked</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Real Vets, Real Care</h4>
+                                <p class="opacity-80 text-sm">Licensed veterinarians when you need them</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hidden md:block mt-auto">
+                        <div class="flex items-center gap-4">
+                            <div class="flex -space-x-4">
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
+                                    JD</div>
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
+                                    KL</div>
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
+                                    +</div>
+                            </div>
+                            <div class="text-sm">
+                                <div>247 pet parents joined today</div>
+                                <div class="opacity-75">Join them now!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-8 md:w-3/5">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold">Start your free trial</h3>
+                        <button class="hidden md:block" id="close-modal">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Your name</label>
+                            <input type="text"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
+                                placeholder="John Doe">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Email address</label>
+                            <input type="email"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Pet's name</label>
+                            <input type="text"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
+                                placeholder="Fluffy">
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Pet type</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div
+                                    class="border border-gray-200 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:border-[#6B46C1] transition-colors">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-[#6B46C1]/10 flex items-center justify-center">
+                                        <i data-lucide="dog" class="w-6 h-6 text-[#6B46C1]"></i>
+                                    </div>
+                                    <span>Dog</span>
+                                </div>
+                                <div
+                                    class="border border-gray-200 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:border-[#6B46C1] transition-colors">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-[#6B46C1]/10 flex items-center justify-center">
+                                        <i data-lucide="cat" class="w-6 h-6 text-[#6B46C1]"></i>
+                                    </div>
+                                    <span>Cat</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button"
+                            class="w-full py-4 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white rounded-lg font-semibold">
+                            Start Free Trial
+                        </button>
+
+                        <div class="text-center mt-4 text-sm text-gray-500">
+                            By signing up, you agree to our Terms and Privacy Policy
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sticky CTA bar -->
+    <div class="fixed bottom-0 left-0 right-0 lg:hidden bg-white shadow-lg p-4 flex gap-2 z-50">
+        <button
+            class="primary-btn flex-1 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white py-3 rounded-lg font-semibold">
+            Start Free Trial
+        </button>
+        <button class="bg-gray-100 p-3 rounded-lg">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+    </div>
+
+    <script>
+        // Initialize Lucide icons and all interactive elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup IntersectionObserver for reveal animations
+            function setupRevealAnimations() {
+                const revealElements = document.querySelectorAll('.reveal');
+                
+                const revealObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            // Unobserve after revealing
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                revealElements.forEach(el => {
+                    revealObserver.observe(el);
+                });
+            }
+            
+            // Setup all animations and observers
+            setupRevealAnimations();
+            
+            // Initialize icons
+            lucide.createIcons();
+
+            // Reveal animations with GSAP ScrollTrigger
+            function setupScrollAnimations() {
+                // Only use GSAP on non-mobile devices
+                if (window.innerWidth > 768) {
+                    gsap.registerPlugin(ScrollTrigger);
+                    
+                    // Hero section blur reveal
+                    gsap.to("#hero-title, #hero-subtitle, #hero-buttons, #hero-badges, #hero-comparison", {
+                        filter: "blur(0px)",
+                        opacity: 1,
+                        y: 0,
+                        stagger: 0.2,
+                        duration: 1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: "#hero-title",
+                            start: "top 80%",
+                        }
+                    });
+                    
+                    // CTA section blur reveal
+                    gsap.to("#cta-title, #cta-subtitle, #cta-button, #cta-badges", {
+                        filter: "blur(0px)",
+                        opacity: 1,
+                        y: 0,
+                        stagger: 0.2,
+                        duration: 1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: "#cta-title",
+                            start: "top 80%",
+                        }
+                    });
+                    
+                    // Reveal animations for sections
+                    gsap.utils.toArray('.reveal').forEach(element => {
+                        gsap.fromTo(element, 
+                            { y: 30, opacity: 0 },
+                            {
+                                y: 0,
+                                opacity: 1,
+                                ease: "power2.out",
+                                duration: 0.8,
+                                scrollTrigger: {
+                                    trigger: element,
+                                    start: "top 85%",
+                                    // Uncomment this to make the animation only happen once:
+                                    // once: true
+                                }
+                            }
+                        );
+                    });
+                    
+                    // 3D card tilt effect
+                    const card3d = document.querySelector('.card-3d');
+                    if (card3d) {
+                        document.querySelector('.perspective-container').addEventListener('mousemove', (e) => {
+                            const container = e.currentTarget;
+                            const rect = container.getBoundingClientRect();
+                            const x = (e.clientX - rect.left) / rect.width;
+                            const y = (e.clientY - rect.top) / rect.height;
+                            
+                            gsap.to(card3d, {
+                                rotateY: -10 + (x - 0.5) * 8,
+                                rotateX: 5 + (y - 0.5) * 8,
+                                duration: 0.5,
+                                ease: "power2.out"
+                            });
+                        });
+                        
+                        document.querySelector('.perspective-container').addEventListener('mouseleave', () => {
+                            gsap.to(card3d, {
+                                rotateY: -10,
+                                rotateX: 5,
+                                duration: 0.5,
+                                ease: "power2.out"
+                            });
+                        });
+                    }
+                } else {
+                    // For mobile, just make elements visible without complex animations
+                    document.querySelectorAll('.blur-reveal').forEach(el => {
+                        el.style.filter = 'blur(0)';
+                        el.style.opacity = '1';
+                    });
+                    
+                    document.querySelectorAll('.reveal').forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                        el.style.visibility = 'visible';
+                    });
+                }
+            }
+            
+            // Call setup for scroll animations
+            setupScrollAnimations();
+
+            // Parallax effect for floating elements
+            function setupParallaxEffect() {
+                if (window.innerWidth > 768) {
+                    document.addEventListener('mousemove', (e) => {
+                        const parallaxElements = document.querySelectorAll('.parallax-element');
+                        const mouseX = e.clientX / window.innerWidth - 0.5;
+                        const mouseY = e.clientY / window.innerHeight - 0.5;
+                        
+                        parallaxElements.forEach(el => {
+                            const depth = el.getAttribute('data-depth') || 0.2;
+                            const moveX = mouseX * depth * 100;
+                            const moveY = mouseY * depth * 100;
+                            gsap.to(el, {
+                                x: moveX,
+                                y: moveY,
+                                duration: 1,
+                                ease: "power2.out"
+                            });
+                        });
+                    });
+                }
+            }
+            
+            // Call setup for parallax
+            setupParallaxEffect();
+
+            // Function to handle step-by-step animation when section is in view
+            function setupBookingSteps() {
+                const section = document.getElementById('how');
+                const timelineProgress = document.getElementById('timeline-progress');
+                const bookingSteps = document.querySelectorAll('.booking-step');
+                
+                // Set up step highlighting animation cycle
+                let currentStep = 0;
+                
+                function highlightStep(stepIndex) {
+                    // Reset all steps
+                    bookingSteps.forEach((step, i) => {
+                        step.classList.remove('highlight');
+                    });
+                    
+                    // Highlight current step
+                    bookingSteps[stepIndex].classList.add('highlight');
+                    
+                    // Update progress bar
+                    const progressWidth = ((stepIndex + 1) / bookingSteps.length) * 100;
+                    timelineProgress.style.width = `${progressWidth}%`;
+                }
+                
+                // Create observer for booking steps section
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Start the step highlighting cycle
+                            highlightStep(0);
+                            
+                            const stepInterval = setInterval(() => {
+                                currentStep = (currentStep + 1) % bookingSteps.length;
+                                highlightStep(currentStep);
+                            }, 3000);
+                            
+                            // Store the interval ID on the section element so we can clear it later
+                            section.dataset.intervalId = stepInterval;
+                        } else {
+                            // Clear the interval when section is out of view
+                            if (section.dataset.intervalId) {
+                                clearInterval(parseInt(section.dataset.intervalId));
+                                section.dataset.intervalId = null;
+                            }
+                        }
+                    });
+                }, {
+                    threshold: 0.3
+                });
+                
+                if (section) {
+                    observer.observe(section);
+                }
+            }
+
+            // Set up the booking steps animation
+            setupBookingSteps();
+
+            // Typing animation for chat demo
+            const typingIndicator = document.querySelector('.typing-indicator');
+            if (typingIndicator) {
+                setTimeout(() => {
+                    typingIndicator.parentElement.innerHTML = "Yes, that's perfectly normal! Adult dogs sleep 12-14 hours a day. Puppies and seniors may sleep even more. 😊";
+                }, 2000);
+            }
+
+            // Magnetic button effect
+            document.querySelectorAll('.magnetic-btn').forEach(button => {
+                button.addEventListener('mousemove', (e) => {
+                    const rect = button.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+
+                    button.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+                });
+
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = '';
+                });
+            });
+
+            // Custom Select Dropdown
+            const customSelect = document.getElementById('custom-select');
+            const selectedText = document.getElementById('custom-select-selected');
+            const optionsContainer = document.getElementById('custom-select-items');
+            const options = document.querySelectorAll('.custom-select-item');
+            const hiddenSelect = document.getElementById('procedure-dropdown');
+
+            if (customSelect && selectedText && optionsContainer && hiddenSelect) {
+                // Toggle dropdown
+                selectedText.addEventListener('click', () => {
+                    optionsContainer.classList.toggle('show');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!customSelect.contains(e.target)) {
+                        optionsContainer.classList.remove('show');
+                    }
+                });
+
+                // Handle option selection
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        const value = option.getAttribute('data-value');
+                        const text = option.textContent;
+                        
+                        // Update selected text
+                        selectedText.querySelector('span').textContent = text;
+                        
+                        // Update hidden native select (for form submission)
+                        hiddenSelect.value = value;
+                        
+                        // Update styling
+                        options.forEach(opt => opt.classList.remove('selected'));
+                        option.classList.add('selected');
+                        
+                        // Hide dropdown
+                        optionsContainer.classList.remove('show');
+                        
+                        // Trigger confetti effect to celebrate savings
+                        if (typeof confetti === 'function') {
+                            confetti({
+                                particleCount: 100,
+                                spread: 70,
+                                origin: { y: 0.6 }
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Modal functionality
+            const modal = document.getElementById('signup-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const closeModalMobileBtn = document.getElementById('close-modal-mobile');
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                });
+            }
+
+            if (closeModalMobileBtn) {
+                closeModalMobileBtn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                });
+            }
+
+            // Close modal when clicking outside
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // CTA handler
+        window.handleCTA = function (event) {
+            if (!event) event = window.event;
+
+            // Add spring animation to button
+            const target = event.target.closest('button') || event.target;
+            target.classList.add('spring');
+
+            // Create confetti effect
+            const colors = ['#6B46C1', '#8B5CF6', '#3B82F6', '#10B981', '#EC4899'];
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: colors
+                });
+            }
+
+            setTimeout(() => {
+                target.classList.remove('spring');
+                // Show modal
+                const modal = document.getElementById('signup-modal');
+                if (modal) modal.classList.add('active');
+            }, 600);
+
+            return false; // Prevent default
+        };
+    </script>
+</body>
+
+</html>

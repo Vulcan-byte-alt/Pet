@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:linear.app)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:cash.app)",
+      "WebFetch(domain:pitch.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
