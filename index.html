@@ -7,12 +7,7 @@
     <title>CREST.PET - Modern Pet Care</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
-        rel="stylesheet">
+    
     <!-- Lucide Icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.294.0/lucide.min.js"></script>
     <!-- For confetti effect -->
@@ -3054,18 +3049,16 @@
                 </p>
             </div>
     
-            <!-- Option 1: Contained Video with Autoplay -->
             <div class="neo-brutal bg-white p-4 rounded-xl overflow-hidden reveal" id="video-container">
-                <!-- Direct HTML5 video that autoplays when in viewport -->
                 <div class="aspect-video w-full">
-                <video controls width="100%" poster="video-poster.jpg">
-                    <source src="video.webm" type="video/webm">
-                    <source src="video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                    <video id="genz-video" class="w-full h-full rounded-lg object-cover" muted loop playsinline preload="metadata">
+                        <!-- Replace this with your actual video file -->
+                        <source src="video.webm" type="video/webm">
+                        <source src="video.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
                 </div>
-    
-                <!-- Optional caption or tagline -->
+            
                 <div class="p-4 text-center">
                     <p class="text-gray-600">"We designed CREST.PET to fit seamlessly into your digital lifestyle"</p>
                 </div>
