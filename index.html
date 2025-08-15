@@ -14,9 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
         rel="stylesheet">
     <!-- Cabinet Grotesk & Clash Display -->
-    <link
-        href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&f[]=clash-display@700,600,500&display=swap"
-        rel="stylesheet">
+
     <!-- Lucide Icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.294.0/lucide.min.js"></script>
     <!-- For confetti effect -->
@@ -25,8 +23,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        /* Custom Fonts */
-        @import url('https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&f[]=cabinet-grotesk@700,600,500&display=swap');
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter_18pt-Regular.ttf') format('ttf');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('fonts/SpaceGrotesk-Regular.ttf') format('ttf');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'PlusJakartaSans';
+            src: url('fonts/PlusJakartaSans-Regular.ttf') format('ttf');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DMSans';
+            src: url("Fonts/DMSans_18pt-Regular.ttf");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
 
         /* Custom styles not covered by Tailwind */
         :root {
@@ -1136,6 +1164,230 @@
             align-items: center;
             height: 24px;
         }
+
+        /* Added styles for new features */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .badge-purple {
+            background-color: rgba(107, 70, 193, 0.1);
+            color: var(--hero-purple);
+        }
+
+        .badge-red {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--alert-red);
+        }
+
+        .badge-blue {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--trust-blue);
+        }
+
+        .badge-green {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-green);
+        }
+
+        .feature-card {
+            border-radius: 1rem;
+            padding: 1.5rem;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .emergency-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background-color: rgba(239, 68, 68, 0.05);
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .emergency-item:hover {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .ai-tabs {
+            display: flex;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-tab {
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .ai-tab.active {
+            color: var(--hero-purple);
+        }
+
+        .ai-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--hero-purple);
+        }
+
+        .ai-tab-content {
+            display: none;
+        }
+
+        .ai-tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(107, 70, 193, 0.1);
+            color: var(--hero-purple);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-green);
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .free-trial-badge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            background-color: #FEF3C7;
+            color: #D97706;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-left: 0.75rem;
+        }
+
+        .emergency-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--alert-red);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .ai-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ai-feature-card {
+            border-radius: 1rem;
+            padding: 1.5rem;
+            background-color: white;
+            transition: all 0.3s ease;
+            border: 1px solid #E2E8F0;
+        }
+
+        .ai-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(107, 70, 193, 0.2);
+        }
+
+        .ai-feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(107, 70, 193, 0.1);
+            color: var(--hero-purple);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark-text);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -1161,14 +1413,14 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center h-20 glass rounded-3xl px-8">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg"></div>
-                    <span class="text-2xl font-bold">CREST.PET</span>
+                    <img src="logo.png" alt="CREST.PET Logo" class="w-24 h-24 object-contain">
                 </div>
 
                 <div class="hidden md:flex items-center space-x-10">
                     <a href="#features" class="hover:text-purple-600 transition font-medium">Features</a>
                     <a href="#pricing" class="hover:text-purple-600 transition font-medium">Pricing</a>
                     <a href="#how" class="hover:text-purple-600 transition font-medium">How it Works</a>
+                    <a href="#emergency" class="hover:text-purple-600 transition font-medium">Emergency Care</a>
                 </div>
 
                 <div class="flex items-center space-x-6">
@@ -1186,26 +1438,27 @@
             data-depth="0.2"></div>
         <div class="absolute bottom-40 right-40 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl parallax-element"
             data-depth="0.3"></div>
-    
+
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <!-- Properly centered hero text -->
-            <div class="text-center mb-20"> <!-- Removed max-width constraint to allow full centering -->
+            <div class="text-center mb-20">
                 <!-- Single line hero text with gradient highlight -->
                 <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 mx-auto fade-in" id="hero-title">
                     Vet care that's actually <span class="gradient-text">affordable</span>
                 </h1>
-    
+
                 <p class="text-xl text-gray-600 mb-8 mx-auto max-w-2xl fade-in-delay-1" id="hero-subtitle">
                     Save 80% on pet healthcare. No membership fees. No BS.
                 </p>
-    
+
                 <div class="flex flex-wrap gap-4 justify-center fade-in-delay-2" id="hero-buttons">
                     <button class="primary-btn group" onclick="handleCTA()">
                         <span class="flex items-center gap-2">
                             Start Free Trial
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="group-hover:rotate-12 transition-transform">
+                            <span class="pill-badge bg-amber-100 text-amber-600">No credit card required</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="group-hover:rotate-12 transition-transform">
                                 <path
                                     d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z">
                                 </path>
@@ -1217,7 +1470,7 @@
                     </button>
                 </div>
             </div>
-    
+
             <!-- Simplified Visual Comparison Card with Animation -->
             <div class="perspective-container mt-16 mx-auto max-w-5xl fade-in-delay-3" id="comparison-container">
                 <div class="relative w-full transform rotate-x-2 translate-z-12 shadow-2xl">
@@ -1242,13 +1495,13 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <!-- CREST.PET Side -->
                             <div class="relative overflow-hidden">
                                 <!-- Happy pet image with overlay -->
                                 <div class="h-80">
-                                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Happy dog"
-                                        class="w-full h-full object-cover">
+                                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb"
+                                        alt="Happy dog" class="w-full h-full object-cover">
                                     <div
                                         class="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-700/30 flex flex-col justify-end p-6">
                                         <h4 class="text-white text-2xl font-bold mb-1">CREST.PET</h4>
@@ -1261,12 +1514,13 @@
                                 </div>
                             </div>
                         </div>
-    
+
                         <!-- Savings badge -->
                         <div
                             class="absolute top-4 right-4 bg-green-500 text-white rounded-full px-4 py-2 font-bold flex items-center gap-2 shadow-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path
                                     d="M20.91 8.84 8.56 2.23a1.93 1.93 0 0 0-1.81 0L3.1 4.13a2.12 2.12 0 0 0-.05 3.69l12.22 6.93a2 2 0 0 0 1.94 0L21 12.51a2.12 2.12 0 0 0-.09-3.67Z">
                                 </path>
@@ -1281,7 +1535,7 @@
                             Save 80%
                         </div>
                     </div>
-    
+
                     <!-- Floating element with animation -->
                     <div class="absolute -bottom-6 right-8 transform floating animation-delay-800">
                         <div class="bg-white p-3 rounded-lg shadow-lg flex items-center gap-2">
@@ -1324,18 +1578,69 @@
                         </svg>
                     </div>
                     <h3 class="text-3xl font-bold mb-2">80% Cheaper</h3>
-                    <p class="text-gray-600 mb-8 text-lg">Than traditional vet visits, no joke</p>
+                    <p class="text-gray-600 mb-6 text-lg">Than traditional vet visits, no joke</p>
                     <div class="flex items-end">
                         <span class="counter text-8xl font-bold text-[#EF4444]" id="counter">80</span>
                         <span class="text-4xl font-bold ml-2">%</span>
                     </div>
-                    <p class="mt-6 text-gray-500">Average savings across all services</p>
-                    <button class="mt-8 px-6 py-3 bg-[#EF4444]/10 text-[#EF4444] font-semibold rounded-lg">See price
-                        comparison</button>
+                    <p class="mt-3 text-gray-500">Average savings across all services</p>
+
+                    <!-- Added comparison list to fill space -->
+                    <div class="mt-6 bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Real Member Savings</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-6 bg-red-500 rounded-full mr-3"></div>
+                                    <span>Dental Cleaning</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 line-through mr-2">$420</span>
+                                    <span class="font-bold text-red-500">$84</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-6 bg-red-500 rounded-full mr-3"></div>
+                                    <span>Wellness Exam</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 line-through mr-2">$200</span>
+                                    <span class="font-bold text-red-500">$60</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-6 bg-red-500 rounded-full mr-3"></div>
+                                    <span>Vaccinations</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-400 line-through mr-2">$150</span>
+                                    <span class="font-bold text-red-500">$45</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer quote -->
+                    <div class="mt-4 bg-red-50 p-3 rounded-lg border-l-4 border-red-500 text-sm italic">
+                        "I saved over $2,400 last year on my dog's care. Best decision ever!"
+                        <div class="mt-1 text-xs text-gray-500 not-italic">- Amanda L., Pet Parent</div>
+                    </div>
+
+                    <button
+                        class="mt-6 px-6 py-3 bg-[#EF4444]/10 text-[#EF4444] font-semibold rounded-lg flex items-center justify-center w-full">
+                        See price comparison
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="ml-2">
+                            <path d="m9 18 6-6-6-6"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
-            <!-- 24/7 AI Vet Card with properly shaped chat bubbles -->
+            <!-- 24/7 AI Vet Card (1x2) - Improved chat interface -->
             <div class="card-1x2">
                 <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
                     <div class="absolute top-4 right-4">
@@ -1349,48 +1654,35 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-2">24/7 AI Vet</h3>
                     <p class="text-gray-600 mb-4">Chat anytime, get answers instantly</p>
-            
-                    <!-- Chat Demo with proper bubble shapes -->
+
+                    <!-- Live Chat Demo - Improved for better flow -->
                     <div class="bg-white rounded-lg p-4 shadow-inner">
                         <div class="space-y-3">
                             <!-- AI welcome message -->
-                            <div class="flex">
-                                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex-shrink-0"></div>
-                                <div class="bg-purple-50 rounded-lg rounded-tl-none p-3 ml-2 max-w-[75%]">
-                                    <p class="text-sm">Hi! I'm your AI vet assistant. How can I help with your pet today?</p>
-                                </div>
+                            <div class="chat-bubble bg-purple-100 max-w-[70%]">
+                                Hi there! How can I help with your pet today? 🐾
                             </div>
-            
+
                             <!-- User question -->
-                            <div class="flex justify-end">
-                                <div class="bg-gray-100 rounded-lg rounded-tr-none p-3 max-w-[75%]">
-                                    <p class="text-sm">Is it normal for my dog to sleep 14 hours?</p>
-                                </div>
-                                <div class="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0 ml-2"></div>
+                            <div class="chat-bubble bg-gray-100 max-w-[70%] ml-auto">
+                                Is it normal for my dog to sleep 14 hours?
                             </div>
-            
+
                             <!-- AI response -->
-                            <div class="flex">
-                                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex-shrink-0"></div>
-                                <div class="bg-purple-50 rounded-lg rounded-tl-none p-3 ml-2 max-w-[75%]">
-                                    <p class="text-sm">Yes, that's perfectly normal! Adult dogs sleep 12-14 hours a day. Puppies and
-                                        seniors may sleep even more. 😊</p>
-                                </div>
+                            <div class="chat-bubble bg-purple-100 max-w-[70%]">
+                                Yes, that's perfectly normal! Adult dogs sleep 12-14 hours a day. Puppies and seniors
+                                may sleep even more. 😊
                             </div>
-            
+
                             <!-- User typing animation -->
                             <div class="flex justify-end">
-                                <div class="bg-gray-100 rounded-lg rounded-tr-none p-3 px-4 max-w-[75%] flex items-center">
-                                    <div class="flex items-center gap-1">
-                                        <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                                            style="animation-delay: 0s;"></span>
-                                        <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                                            style="animation-delay: 0.2s;"></span>
-                                        <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                                            style="animation-delay: 0.4s;"></span>
+                                <div class="chat-bubble bg-gray-100 max-w-[70%] ml-auto">
+                                    <div class="typing-indicator">
+                                        <span class="typing-dot"></span>
+                                        <span class="typing-dot"></span>
+                                        <span class="typing-dot"></span>
                                     </div>
                                 </div>
-                                <div class="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0 ml-2"></div>
                             </div>
                         </div>
                     </div>
@@ -1445,14 +1737,6 @@
             <!-- No Membership BS Card (1x1) -->
             <div class="card-1x1">
                 <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
-                    <div class="absolute top-4 right-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="text-[#EF4444]">
-                            <path d="M18 6 6 18"></path>
-                            <path d="m6 6 12 12"></path>
-                        </svg>
-                    </div>
                     <h3 class="text-2xl font-bold mb-2">No Membership BS</h3>
                     <p class="text-gray-600 mb-4">Pay only for what you need</p>
                     <div class="flex flex-col gap-2">
@@ -1619,6 +1903,723 @@
         </div>
     </section>
 
+    <!-- Emergency Care Section (NEW) -->
+    <section id="emergency" class="py-20 px-6 lg:px-16 gradient-mesh">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <div class="inline-block bg-red-100 text-red-600 px-4 py-1 rounded-full font-medium mb-4">Emergency Care
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    It's 2 AM and your pet is <span class="gradient-text">sick?</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Don't panic. Get instant AI veterinary guidance while you decide if an emergency visit is needed.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 reveal">
+                <!-- Left side - Features -->
+                <div class="space-y-6">
+                    <div class="neo-brutal bg-white p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500">
+                                    <path
+                                        d="M15.6 10.8c1.2.49 2 1.7 2 3 0 1.8-1.46 3.3-3.3 3.3H10a4.28 4.28 0 0 1-4.3-4.3V5.2a2.2 2.2 0 0 1 4.3-.6">
+                                    </path>
+                                    <path d="M14 10V3a2 2 0 0 1 4 0v7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">24/7 Instant Response</h3>
+                                <p class="text-gray-600">No waiting rooms, no appointments needed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="neo-brutal bg-white p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500">
+                                    <path d="m22 8-6 4 6 4V8Z"></path>
+                                    <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">AI Video Consultations</h3>
+                                <p class="text-gray-600">Show symptoms via video for better diagnosis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="neo-brutal bg-white p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path>
+                                    <path d="m9 12 2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Triage & Peace of Mind</h3>
+                                <p class="text-gray-600">Know when it's truly an emergency</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h4 class="font-bold text-lg mb-4">Common Emergencies We Handle</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="emergency-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500 mr-3">
+                                    <path d="M3 2v1c0 1 2 1 2 2S3 6 3 7s2 1 2 2-2 1-2 2 2 1 2 2"></path>
+                                    <path d="M15 5h-3a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h0a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3">
+                                    </path>
+                                    <path d="M19 5h3"></path>
+                                    <path d="M21 5v14"></path>
+                                    <path d="M11 21h10"></path>
+                                    <path d="M11 17h5"></path>
+                                </svg>
+                                Vomiting or diarrhea
+                            </div>
+                            <div class="emergency-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500 mr-3">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>
+                                Difficulty breathing
+                            </div>
+                            <div class="emergency-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500 mr-3">
+                                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2"></path>
+                                    <path d="M12 16v-4"></path>
+                                    <path d="M12 8h.01"></path>
+                                </svg>
+                                Sudden behavior changes
+                            </div>
+                            <div class="emergency-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500 mr-3">
+                                    <path d="M10 17l5-5-5-5"></path>
+                                    <path d="M17 19v-2"></path>
+                                    <path d="M17 15v-2"></path>
+                                    <path d="M17 11V9"></path>
+                                    <path d="M17 7V5"></path>
+                                </svg>
+                                Suspected poisoning
+                            </div>
+                            <div class="emergency-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500 mr-3">
+                                    <path d="M4 6h16"></path>
+                                    <path d="M4 12h8"></path>
+                                    <path d="M4 18h12"></path>
+                                    <path d="M18 10v8a2 2 0 0 0 2 2h0"></path>
+                                </svg>
+                                Injuries or wounds
+                            </div>
+                            <div class="emergency-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500 mr-3">
+                                    <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"></path>
+                                    <path d="m9 11 3 3 3-3"></path>
+                                </svg>
+                                Seizures or collapse
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right side - AI preview -->
+                <div class="neo-brutal bg-white p-6 rounded-xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                                AI
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Emergency AI Vet</h4>
+                                <div class="flex items-center text-sm">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full inline-block mr-1"></span>
+                                    <span class="text-green-600">Available 24/7</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="emergency-badge">Emergency Mode</div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl mb-6">
+                        <div class="chat-bubble bg-red-100 max-w-[85%]">
+                            <div class="font-bold mb-1">Emergency Triage Assistant</div>
+                            I'm here to help with your pet emergency. Please briefly describe what's happening with your
+                            pet.
+                        </div>
+
+                        <div class="chat-bubble bg-gray-100 max-w-[85%] ml-auto">
+                            My dog just ate chocolate. It was a dark chocolate bar, about 2 oz. He's a 15 lb terrier.
+                        </div>
+
+                        <div class="chat-bubble bg-red-100 max-w-[85%]">
+                            <div class="font-bold text-red-600 mb-1">⚠️ Potential Emergency</div>
+                            Dark chocolate is toxic to dogs, and at your dog's weight (15 lbs), 2 oz of dark chocolate
+                            could be dangerous. Symptoms of chocolate toxicity include:
+                            <ul class="mt-2 ml-4 space-y-1 list-disc">
+                                <li>Vomiting and diarrhea</li>
+                                <li>Increased thirst and urination</li>
+                                <li>Restlessness and increased heart rate</li>
+                                <li>Muscle tremors, seizures (in severe cases)</li>
+                            </ul>
+                            <div class="mt-3 font-medium">Recommendation: This requires prompt veterinary attention.
+                                Would you like to:
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <button class="bg-red-600 text-white py-2 px-3 rounded-lg text-sm font-medium">Find
+                                        Emergency Vet</button>
+                                    <button
+                                        class="bg-purple-600 text-white py-2 px-3 rounded-lg text-sm font-medium">Video
+                                        Consult (2 min)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <input type="text" placeholder="Describe your emergency..."
+                            class="flex-1 bg-gray-100 border-0 rounded-l-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <button
+                            class="bg-gradient-to-r from-red-500 to-purple-600 text-white rounded-r-lg px-4 py-3 font-medium">Get
+                            Help Now</button>
+                    </div>
+
+                    <div class="mt-6 text-center">
+                        <button
+                            class="primary-btn w-full py-3 flex items-center justify-center gap-2 bg-gradient-to-r from-red-500 to-purple-600"
+                            onclick="handleCTA()">
+                            <span>Get Emergency Access</span>
+                            <span class="pill-badge bg-amber-100 text-amber-600">Free Trial</span>
+                        </button>
+                        <p class="text-sm text-gray-500 mt-2">No credit card required • Cancel anytime</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Tracking Section (NEW) -->
+    <section id="health-tracking" class="py-20 px-6 lg:px-16 bg-gradient-to-b from-[#F8FAFC] to-[#EDF2F7]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <div class="inline-block bg-blue-100 text-blue-600 px-4 py-1 rounded-full font-medium mb-4">Health
+                    Tracking</div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Can't remember medications & <span class="gradient-text">appointments?</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    AI-powered tracking for everything your pet needs, all in one place.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 reveal">
+                <div class="neo-brutal bg-white p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-blue-600">
+                            <path d="M12 2v10"></path>
+                            <path d="m9 7 3-3 3 3"></path>
+                            <path d="M5 3a16.88 16.88 0 0 0 0 18"></path>
+                            <path d="M19 3a16.88 16.88 0 0 1 0 18"></path>
+                            <path d="M5 13h14"></path>
+                            <path d="M19 21a9.33 9.33 0 0 0-7-4 9.33 9.33 0 0 0-7 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Smart Medication Reminders</h3>
+                    <p class="text-gray-600 mb-4">Never miss a dose with AI-powered alerts</p>
+
+                    <div class="bg-blue-50 rounded-lg p-4 mt-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-medium">Today's Medications</div>
+                            <div class="text-sm text-blue-600">3 remaining</div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div
+                                class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
+                                <div>
+                                    <div class="font-medium">Heartworm Prevention</div>
+                                    <div class="text-sm text-gray-500">1 tablet with food</div>
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M20 6 9 17l-5-5"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-lg border border-gray-200">
+                                <div>
+                                    <div class="font-medium">Allergy Medication</div>
+                                    <div class="text-sm text-gray-500">2 pills, 8PM</div>
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="m15 9-6 6"></path>
+                                        <path d="m9 9 6 6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neo-brutal bg-white p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-blue-600">
+                            <path d="M3 3v18h18"></path>
+                            <path d="m19 9-5 5-4-4-3 3"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Health Trend Analytics</h3>
+                    <p class="text-gray-600 mb-4">Visual charts for weight, symptoms, and more</p>
+
+                    <div class="bg-blue-50 rounded-lg p-4 mt-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-medium">Weight History</div>
+                            <div class="text-sm text-blue-600">Last 6 months</div>
+                        </div>
+                        <div class="h-32 flex items-end">
+                            <!-- Simple weight chart representation -->
+                            <div class="w-1/6 bg-blue-200 rounded-t-lg h-16 mx-0.5"></div>
+                            <div class="w-1/6 bg-blue-300 rounded-t-lg h-20 mx-0.5"></div>
+                            <div class="w-1/6 bg-blue-400 rounded-t-lg h-24 mx-0.5"></div>
+                            <div class="w-1/6 bg-blue-500 rounded-t-lg h-20 mx-0.5"></div>
+                            <div class="w-1/6 bg-blue-600 rounded-t-lg h-28 mx-0.5"></div>
+                            <div class="w-1/6 bg-blue-700 rounded-t-lg h-24 mx-0.5"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>Mar</span>
+                            <span>Apr</span>
+                            <span>May</span>
+                            <span>Jun</span>
+                            <span>Jul</span>
+                            <span>Aug</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neo-brutal bg-white p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-blue-600">
+                            <path
+                                d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z">
+                            </path>
+                            <path d="m3.3 7 8.7 5 8.7-5"></path>
+                            <path d="M12 22V12"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Multi-Pet Management</h3>
+                    <p class="text-gray-600 mb-4">Track all your pets in one dashboard</p>
+
+                    <div class="bg-blue-50 rounded-lg p-4 mt-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-medium">Your Pets</div>
+                            <div class="text-sm text-blue-600">All Healthy</div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div
+                                class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-amber-600">🐕</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">Buddy</div>
+                                        <div class="text-xs text-gray-500">Labrador, 3 years</div>
+                                    </div>
+                                </div>
+                                <div class="text-green-500 text-sm font-medium">Healthy</div>
+                            </div>
+
+                            <div
+                                class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-gray-600">🐈</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">Whiskers</div>
+                                        <div class="text-xs text-gray-500">Tabby, 5 years</div>
+                                    </div>
+                                </div>
+                                <div class="text-amber-500 text-sm font-medium">Checkup due</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center reveal">
+                <h4 class="text-xl font-bold mb-4">What You Can Track</h4>
+                <div class="flex flex-wrap justify-center gap-4 max-w-2xl mx-auto">
+                    <div class="badge-purple py-2 px-4">Weight trends</div>
+                    <div class="badge-blue py-2 px-4">Appointments</div>
+                    <div class="badge-green py-2 px-4">Medications</div>
+                    <div class="badge-purple py-2 px-4">Vet records</div>
+                    <div class="badge-blue py-2 px-4">Vaccinations</div>
+                    <div class="badge-red py-2 px-4">Symptoms</div>
+                </div>
+
+                <button class="primary-btn mt-8" onclick="handleCTA()">
+                    Try Free - Track Your Pets
+                    <span class="pill-badge bg-amber-100 text-amber-600">No card needed</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dual AI Assistants Section (NEW) -->
+    <section id="ai-assistants" class="py-20 px-6 lg:px-16 gradient-mesh">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <div class="inline-block bg-purple-100 text-purple-600 px-4 py-1 rounded-full font-medium mb-4">AI
+                    Assistants</div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Two Powerful <span class="gradient-text">AI Assistants</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Complete pet care coverage through web, mobile, and video
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 reveal">
+                <!-- Dr. Paw AI -->
+                <div class="neo-brutal bg-white p-8 rounded-xl">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5">
+                                </path>
+                                <path
+                                    d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5">
+                                </path>
+                                <path d="M8 14v.5"></path>
+                                <path d="M16 14v.5"></path>
+                                <path d="M11.25 16.25h1.5L12 17l-.75-.75Z"></path>
+                                <path
+                                    d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444c0-1.061-.162-2.2-.493-3.309m-9.243-6.082A8.801 8.801 0 0 1 12 5c.78 0 1.5.108 2.161.306">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Dr. Paw AI</h3>
+                            <p class="text-gray-600">Web & App Assistant</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-purple-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>24/7 veterinary advice and triage</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-purple-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Live video consultations with AI vet</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-purple-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Symptom analysis with photo support</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-purple-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Medication reminders and tracking</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-purple-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Personalized health recommendations</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-purple-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Retrieves records from past vets</div>
+                        </div>
+                    </div>
+
+                    <!-- Video AI feature highlight -->
+                    <div class="bg-purple-50 rounded-lg p-4 mb-6">
+                        <h4 class="font-bold text-purple-800 mb-2">AI Video Veterinarian</h4>
+                        <p class="text-gray-700 mb-3">Our AI can see and analyze your pet through video calls and photos
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-purple-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-purple-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Visual symptom assessment</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-purple-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-purple-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">ToothScan™ dental analysis</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-purple-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-purple-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">PoopScan™ digestive health</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-purple-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-purple-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Check eyes, ears, skin</span>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mt-3 italic">Simply show your pet's teeth or their poop to the
+                            camera - our AI instantly analyzes and provides health insights</p>
+                    </div>
+                </div>
+
+                <!-- Marcia AI -->
+                <div class="neo-brutal bg-white p-8 rounded-xl">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Marcia AI</h3>
+                            <p class="text-gray-600">Phone, SMS & MMS</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-blue-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Call or text for instant support</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-blue-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Book appointments via SMS</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-blue-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>ToothScan™ dental analysis</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-blue-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>PoopScan™ digestive health check</div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-blue-600">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
+                            <div>Contacts vets & insurers for you</div>
+                        </div>
+                    </div>
+
+                    <!-- AI Agents Feature -->
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <h4 class="font-bold text-blue-800 mb-2">AI Agents Handle Everything For You</h4>
+                        <p class="text-gray-700 mb-3">Our AI assistants act as your personal pet care coordinators</p>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-blue-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Contact Your Past Vets</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-blue-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Text & Email Management</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-blue-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Insurance Claims</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-blue-700">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Complete Record Transfer</span>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mt-3 italic">No more phone tag! Our AI handles all the tedious
+                            calls
+                            and paperwork while you focus on your pet</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center reveal">
+                <button class="primary-btn" onclick="handleCTA()">
+                    Start Free Trial - Get Both AIs
+                    <span class="pill-badge bg-amber-100 text-amber-600">No payment info required</span>
+                </button>
+                <p class="text-sm text-gray-600 mt-2">All features included with your free trial • Cancel anytime</p>
+            </div>
+        </div>
+    </section>
+
     <!-- AI Assistant Preview -->
     <section class="py-20 gradient-mesh relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 lg:px-8">
@@ -1640,7 +2641,7 @@
                             <span class="text-white font-bold">AI</span>
                         </div>
                         <div>
-                            <h4 class="font-semibold">CREST AI Vet</h4>
+                            <h4 class="font-semibold">Dr. Paw AI Vet</h4>
                             <div class="flex items-center gap-1">
                                 <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                                 <span class="text-sm text-green-500">Online</span>
@@ -1727,11 +2728,30 @@
                 </div>
             </div>
 
-            <button class="text-center mt-8">
-                <a href="#" class="primary-btn mx-auto inline-block" onclick="handleCTA()">
+            <div class="mt-8 text-center">
+                <div class="bg-white rounded-lg p-4 shadow-md inline-block mb-6">
+                    <h4 class="font-bold mb-2">Popular Questions About Our Platform</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
+                        <button class="p-3 bg-purple-50 rounded-lg text-left hover:bg-purple-100 transition">
+                            What features do you have?
+                        </button>
+                        <button class="p-3 bg-purple-50 rounded-lg text-left hover:bg-purple-100 transition">
+                            How can I save up to 80% on vet bills?
+                        </button>
+                        <button class="p-3 bg-purple-50 rounded-lg text-left hover:bg-purple-100 transition">
+                            Can AI handle vet records & insurance?
+                        </button>
+                        <button class="p-3 bg-purple-50 rounded-lg text-left hover:bg-purple-100 transition">
+                            What can AI vets see and diagnose?
+                        </button>
+                    </div>
+                </div>
+
+                <button class="primary-btn mx-auto inline-block" onclick="handleCTA()">
                     Try it free for 30 days
-                </a>
-            </button>
+                    <span class="pill-badge bg-amber-100 text-amber-600">No credit card</span>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1865,6 +2885,42 @@
                 </div>
             </div>
 
+            <!-- Real Member Savings Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-600">Dental cleaning</span>
+                        <span class="badge-green">80% off</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-gray-400 line-through mr-3">$420</span>
+                        <span class="text-2xl font-bold text-[#EF4444]">$84</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-600">Wellness exam</span>
+                        <span class="badge-green">70% off</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-gray-400 line-through mr-3">$200</span>
+                        <span class="text-2xl font-bold text-[#EF4444]">$60</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-600">Vaccinations</span>
+                        <span class="badge-green">70% off</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-gray-400 line-through mr-3">$150</span>
+                        <span class="text-2xl font-bold text-[#EF4444]">$45</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Annual Savings Counter -->
             <div class="text-center mt-16 p-8 neo-brutal bg-gradient-to-br from-purple-50 to-blue-50">
                 <p class="text-xl mb-4">Your estimated annual savings:</p>
@@ -1872,6 +2928,11 @@
                     $2,400
                 </div>
                 <p class="text-gray-600 mt-4">Based on average pet owner with 4 visits per year</p>
+
+                <button class="primary-btn mt-6" onclick="handleCTA()">
+                    Start Free Trial Today
+                    <span class="pill-badge bg-amber-100 text-amber-600">No card required</span>
+                </button>
             </div>
         </div>
     </section>
@@ -2015,714 +3076,716 @@
                     <div class="flex items-start gap-4">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200" alt="Customer"
                             class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold">Alex Chen</span>
+                                <div class="flex text-yellow-400">
+                                    ★★★★★
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"Saved $300 on my dog's dental cleaning. The vet was amazing and
+                                the whole process took 5 minutes to book."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neo-brutal bg-white p-6">
+                    <div class="flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200" alt="Customer"
+                            class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-semibold">Sarah Johnson</span>
+                                <div class="flex text-yellow-400">
+                                    ★★★★★
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"The AI vet chat saved my cat's life. Got immediate advice at 2 AM
+                                and booked an emergency visit for the morning."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Happy Pets Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+                <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400" alt="Happy dog"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1592754862816-1a21a4ea2281?w=400" alt="Happy cat"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400" alt="Happy dog"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1514984879728-be0aff75a6e8?w=400" alt="Happy cat"
+                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section - Improved spacing like Linear -->
+    <section class="py-32 gradient-mesh relative overflow-hidden"> <!-- Increased padding from py-20 to py-32 -->
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10 reveal">
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 blur-reveal" id="cta-title"> <!-- Increased margin-bottom -->
+                Ready to save on pet care?
+            </h2>
+            <p class="text-xl text-gray-600 mb-12 blur-reveal" id="cta-subtitle"> <!-- Increased margin-bottom -->
+                30-day free trial. No credit card required. Cancel anytime.
+            </p>
+
+            <button class="primary-btn text-lg px-12 py-5 mb-12 blur-reveal" id="cta-button" onclick="handleCTA()">
+                <!-- Increased margin-bottom -->
+                Start Your Free Trial
+            </button>
+
+            <div class="flex justify-center items-center gap-6 blur-reveal" id="cta-badges">
+                <div class="flex -space-x-4">
+                    <div
+                        class="w-10 h-10 rounded-full bg-purple-500 border-2 border-white flex items-center justify-center text-white font-bold">
+                        JD
+                    </div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-white font-bold">
+                        SK
+                    </div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-pink-500 border-2 border-white flex items-center justify-center text-white font-bold">
+                        AT
+                    </div>
+                </div>
+                <span class="text-gray-600">Join 247 pet parents who signed up today</span>
+            </div>
+        </div>
+
+        <!-- Background decoration -->
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 lg:px-16 bg-[#0F172A] text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="md:col-span-1">
+                    <h3 class="text-2xl font-bold gradient-text mb-6">CREST.PET</h3>
+                    <p class="text-gray-400 mb-6">Modern pet care for the digital age. Save money, save time, love your
+                        pet.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Online
+                                Consultations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">In-Person Visits</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">AI Vet Chat</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Medication Delivery</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pet Insurance</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">HIPAA Compliance</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 mb-4 md:mb-0">
+                    &copy; 2025 CREST.PET. All rights reserved.
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">Visa
+                    </div>
+                    <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">MC
+                    </div>
+                    <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">Amex
+                    </div>
+                    <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">PayPal
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Trial Signup Modal (Initially hidden) -->
+    <div class="modal-overlay" id="signup-modal">
+        <div class="modal-content p-0 relative">
+            <!-- Close button in top right corner -->
+            <button class="close-modal-btn" id="close-modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </button>
+
+            <div class="flex flex-col md:flex-row">
+                <div
+                    class="bg-gradient-to-br from-[#6B46C1] to-[#8B5CF6] p-8 text-white md:w-2/5 rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
+                    <button class="mb-6 md:hidden" id="close-modal-mobile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+
+                    <h3 class="text-2xl font-bold mb-6">Why pet parents love us</h3>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                            </div>
                             <div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="font-semibold">Alex Chen</span>
-                                    <div class="flex text-yellow-400">
-                                        ★★★★★
-                                    </div>
-                                </div>
-                                <p class="text-gray-600">"Saved $300 on my dog's dental cleaning. The vet was amazing and
-                                    the whole process took 5 minutes to book."</p>
+                                <h4 class="font-semibold">80% Lower Costs</h4>
+                                <p class="opacity-80 text-sm">Save hundreds on routine and emergency care</p>
                             </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
                             </div>
+                            <div>
+                                <h4 class="font-semibold">24/7 AI Vet Support</h4>
+                                <p class="opacity-80 text-sm">Get answers anytime, day or night</p>
                             </div>
-                            
-                            <div class="neo-brutal bg-white p-6">
-                                <div class="flex items-start gap-4">
-                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200" alt="Customer"
-                                        class="w-12 h-12 rounded-full object-cover">
-                                    <div>
-                                        <div class="flex items-center gap-2 mb-2">
-                                            <span class="font-semibold">Sarah Johnson</span>
-                                            <div class="flex text-yellow-400">
-                                                ★★★★★
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-600">"The AI vet chat saved my cat's life. Got immediate advice at 2 AM
-                                            and booked an emergency visit for the morning."</p>
-                                    </div>
-                                </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
                             </div>
+                            <div>
+                                <h4 class="font-semibold">No Contracts or Hidden Fees</h4>
+                                <p class="opacity-80 text-sm">Cancel anytime, no questions asked</p>
                             </div>
-                            
-                            <!-- Happy Pets Grid -->
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
-                                <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400" alt="Happy dog"
-                                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
-                                <img src="https://images.unsplash.com/photo-1592754862816-1a21a4ea2281?w=400" alt="Happy cat"
-                                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
-                                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400" alt="Happy dog"
-                                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
-                                <img src="https://images.unsplash.com/photo-1514984879728-be0aff75a6e8?w=400" alt="Happy cat"
-                                    class="neo-brutal rounded-lg w-full h-48 object-cover hover:scale-105 transition">
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
                             </div>
+                            <div>
+                                <h4 class="font-semibold">Real Vets, Real Care</h4>
+                                <p class="opacity-80 text-sm">Licensed veterinarians when you need them</p>
                             </div>
-                            </section>
-                            
-                            <!-- CTA Section - Improved spacing like Linear -->
-                            <section class="py-32 gradient-mesh relative overflow-hidden"> <!-- Increased padding from py-20 to py-32 -->
-                                <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10 reveal">
-                                    <h2 class="text-4xl md:text-6xl font-bold mb-8 blur-reveal" id="cta-title"> <!-- Increased margin-bottom -->
-                                        Ready to save on pet care?
-                                    </h2>
-                                    <p class="text-xl text-gray-600 mb-12 blur-reveal" id="cta-subtitle"> <!-- Increased margin-bottom -->
-                                        30-day free trial. No credit card required. Cancel anytime.
-                                    </p>
-                            
-                                    <button class="primary-btn text-lg px-12 py-5 mb-12 blur-reveal" id="cta-button" onclick="handleCTA()">
-                                        <!-- Increased margin-bottom -->
-                                        Start Your Free Trial
-                                    </button>
-                            
-                                    <div class="flex justify-center items-center gap-6 blur-reveal" id="cta-badges">
-                                        <div class="flex -space-x-4">
-                                            <div
-                                                class="w-10 h-10 rounded-full bg-purple-500 border-2 border-white flex items-center justify-center text-white font-bold">
-                                                JD
-                                            </div>
-                                            <div
-                                                class="w-10 h-10 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-white font-bold">
-                                                SK
-                                            </div>
-                                            <div
-                                                class="w-10 h-10 rounded-full bg-pink-500 border-2 border-white flex items-center justify-center text-white font-bold">
-                                                AT
-                                            </div>
-                                        </div>
-                                        <span class="text-gray-600">Join 247 pet parents who signed up today</span>
-                                    </div>
-                                </div>
-                            
-                                <!-- Background decoration -->
-                                <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
-                            </section>
-                            
-                            <!-- Footer -->
-                            <footer class="py-12 px-6 lg:px-16 bg-[#0F172A] text-white">
-                                <div class="max-w-6xl mx-auto">
-                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                                        <div class="md:col-span-1">
-                                            <h3 class="text-2xl font-bold gradient-text mb-6">CREST.PET</h3>
-                                            <p class="text-gray-400 mb-6">Modern pet care for the digital age. Save money, save time, love your
-                                                pet.</p>
-                                            <div class="flex space-x-4">
-                                                <a href="#"
-                                                    class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                                                    </svg>
-                                                </a>
-                                                <a href="#"
-                                                    class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path
-                                                            d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                                <a href="#"
-                                                    class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                            
-                                        <div>
-                                            <h4 class="text-lg font-bold mb-4">Services</h4>
-                                            <ul class="space-y-2">
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Online
-                                                        Consultations</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">In-Person Visits</a>
-                                                </li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">AI Vet Chat</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Medication Delivery</a>
-                                                </li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pet Insurance</a></li>
-                                            </ul>
-                                        </div>
-                            
-                                        <div>
-                                            <h4 class="text-lg font-bold mb-4">Company</h4>
-                                            <ul class="space-y-2">
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
-                                            </ul>
-                                        </div>
-                            
-                                        <div>
-                                            <h4 class="text-lg font-bold mb-4">Legal</h4>
-                                            <ul class="space-y-2">
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
-                                                </li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">HIPAA Compliance</a>
-                                                </li>
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Accessibility</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                            
-                                    <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                                        <div class="text-gray-400 mb-4 md:mb-0">
-                                            &copy; 2025 CREST.PET. All rights reserved.
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">Visa</div>
-                                            <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">MC</div>
-                                            <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">Amex</div>
-                                            <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">PayPal
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </footer>
-                            
-                            <!-- Trial Signup Modal (Initially hidden) -->
-                            <div class="modal-overlay" id="signup-modal">
-                                <div class="modal-content p-0 relative">
-                                    <!-- Close button in top right corner -->
-                                    <button class="close-modal-btn" id="close-modal">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 6 6 18"></path>
-                                            <path d="m6 6 12 12"></path>
+                        </div>
+                    </div>
+
+                    <div class="hidden md:block mt-auto">
+                        <div class="flex items-center gap-4">
+                            <div class="flex -space-x-4">
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
+                                    JD</div>
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
+                                    KL</div>
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
+                                    +</div>
+                            </div>
+                            <div class="text-sm">
+                                <div>247 pet parents joined today</div>
+                                <div class="opacity-75">Join them now!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-8 md:w-3/5">
+                    <h3 class="text-2xl font-bold mb-6">Start your free trial</h3>
+
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Your name</label>
+                            <input type="text"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
+                                placeholder="John Doe">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Email address</label>
+                            <input type="email"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Pet's name</label>
+                            <input type="text"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
+                                placeholder="Fluffy">
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Pet type</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div
+                                    class="border border-gray-200 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:border-[#6B46C1] transition-colors">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-[#6B46C1]/10 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="text-[#6B46C1]">
+                                            <path
+                                                d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5">
+                                            </path>
+                                            <path
+                                                d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5">
+                                            </path>
+                                            <path d="M8 14v.5"></path>
+                                            <path d="M16 14v.5"></path>
+                                            <path d="M11.25 16.25h1.5L12 17l-.75-.75Z"></path>
+                                            <path
+                                                d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444c0-1.061-.162-2.2-.493-3.309m-9.243-6.082A8.801 8.801 0 0 1 12 5c.78 0 1.5.108 2.161.306">
+                                            </path>
                                         </svg>
-                                    </button>
-                            
-                                    <div class="flex flex-col md:flex-row">
-                                        <div
-                                            class="bg-gradient-to-br from-[#6B46C1] to-[#8B5CF6] p-8 text-white md:w-2/5 rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
-                                            <button class="mb-6 md:hidden" id="close-modal-mobile">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path d="M18 6 6 18"></path>
-                                                    <path d="m6 6 12 12"></path>
-                                                </svg>
-                                            </button>
-                            
-                                            <h3 class="text-2xl font-bold mb-6">Why pet parents love us</h3>
-                            
-                                            <div class="space-y-4 mb-8">
-                                                <div class="flex items-start gap-3">
-                                                    <div
-                                                        class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round">
-                                                            <path d="M20 6 9 17l-5-5"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <h4 class="font-semibold">80% Lower Costs</h4>
-                                                        <p class="opacity-80 text-sm">Save hundreds on routine and emergency care</p>
-                                                    </div>
-                                                </div>
-                            
-                                                <div class="flex items-start gap-3">
-                                                    <div
-                                                        class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round">
-                                                            <path d="M20 6 9 17l-5-5"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <h4 class="font-semibold">24/7 AI Vet Support</h4>
-                                                        <p class="opacity-80 text-sm">Get answers anytime, day or night</p>
-                                                    </div>
-                                                </div>
-                            
-                                                <div class="flex items-start gap-3">
-                                                    <div
-                                                        class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round">
-                                                            <path d="M20 6 9 17l-5-5"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <h4 class="font-semibold">No Contracts or Hidden Fees</h4>
-                                                        <p class="opacity-80 text-sm">Cancel anytime, no questions asked</p>
-                                                    </div>
-                                                </div>
-                            
-                                                <div class="flex items-start gap-3">
-                                                    <div
-                                                        class="w-6 h-6 rounded-full bg-white/20 flex-shrink-0 flex items-center justify-center mt-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round">
-                                                            <path d="M20 6 9 17l-5-5"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <h4 class="font-semibold">Real Vets, Real Care</h4>
-                                                        <p class="opacity-80 text-sm">Licensed veterinarians when you need them</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                            
-                                            <div class="hidden md:block mt-auto">
-                                                <div class="flex items-center gap-4">
-                                                    <div class="flex -space-x-4">
-                                                        <div
-                                                            class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
-                                                            JD</div>
-                                                        <div
-                                                            class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
-                                                            KL</div>
-                                                        <div
-                                                            class="w-10 h-10 rounded-full border-2 border-white bg-[#6B46C1] flex items-center justify-center font-bold text-sm">
-                                                            +</div>
-                                                    </div>
-                                                    <div class="text-sm">
-                                                        <div>247 pet parents joined today</div>
-                                                        <div class="opacity-75">Join them now!</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="p-8 md:w-3/5">
-                                            <h3 class="text-2xl font-bold mb-6">Start your free trial</h3>
-                            
-                                            <form>
-                                                <div class="mb-4">
-                                                    <label class="block text-sm font-medium mb-2">Your name</label>
-                                                    <input type="text"
-                                                        class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
-                                                        placeholder="John Doe">
-                                                </div>
-                            
-                                                <div class="mb-4">
-                                                    <label class="block text-sm font-medium mb-2">Email address</label>
-                                                    <input type="email"
-                                                        class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
-                                                        placeholder="john@example.com">
-                                                </div>
-                            
-                                                <div class="mb-4">
-                                                    <label class="block text-sm font-medium mb-2">Pet's name</label>
-                                                    <input type="text"
-                                                        class="w-full px-4 py-3 rounded-lg border border-gray-200 outline-none focus:border-[#6B46C1]"
-                                                        placeholder="Fluffy">
-                                                </div>
-                            
-                                                <div class="mb-6">
-                                                    <label class="block text-sm font-medium mb-2">Pet type</label>
-                                                    <div class="grid grid-cols-2 gap-4">
-                                                        <div
-                                                            class="border border-gray-200 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:border-[#6B46C1] transition-colors">
-                                                            <div class="w-10 h-10 rounded-full bg-[#6B46C1]/10 flex items-center justify-center">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                                    stroke-linejoin="round" class="text-[#6B46C1]">
-                                                                    <path
-                                                                        d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5">
-                                                                    </path>
-                                                                    <path
-                                                                        d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5">
-                                                                    </path>
-                                                                    <path d="M8 14v.5"></path>
-                                                                    <path d="M16 14v.5"></path>
-                                                                    <path d="M11.25 16.25h1.5L12 17l-.75-.75Z"></path>
-                                                                    <path
-                                                                        d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444c0-1.061-.162-2.2-.493-3.309m-9.243-6.082A8.801 8.801 0 0 1 12 5c.78 0 1.5.108 2.161.306">
-                                                                    </path>
-                                                                </svg>
-                                                            </div>
-                                                            <span>Dog</span>
-                                                        </div>
-                                                        <div
-                                                            class="border border-gray-200 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:border-[#6B46C1] transition-colors">
-                                                            <div class="w-10 h-10 rounded-full bg-[#6B46C1]/10 flex items-center justify-center">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                                    stroke-linejoin="round" class="text-[#6B46C1]">
-                                                                    <path
-                                                                        d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z">
-                                                                    </path>
-                                                                    <path d="M8 14v.5"></path>
-                                                                    <path d="M16 14v.5"></path>
-                                                                    <path d="M11.25 16.25h1.5L12 17l-.75-.75Z"></path>
-                                                                </svg>
-                                                            </div>
-                                                            <span>Cat</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                            
-                                                <button type="button"
-                                                    class="w-full py-4 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white rounded-lg font-semibold">
-                                                    Start Free Trial
-                                                </button>
-                            
-                                                <div class="text-center mt-4 text-sm text-gray-500">
-                                                    By signing up, you agree to our Terms and Privacy Policy
-                                                </div>
-                                            </form>
-                                        </div>
                                     </div>
+                                    <span>Dog</span>
+                                </div>
+                                <div
+                                    class="border border-gray-200 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:border-[#6B46C1] transition-colors">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-[#6B46C1]/10 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="text-[#6B46C1]">
+                                            <path
+                                                d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z">
+                                            </path>
+                                            <path d="M8 14v.5"></path>
+                                            <path d="M16 14v.5"></path>
+                                            <path d="M11.25 16.25h1.5L12 17l-.75-.75Z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Cat</span>
                                 </div>
                             </div>
-                            
-                            <!-- Mobile sticky CTA bar -->
-                            <div class="fixed bottom-0 left-0 right-0 lg:hidden bg-white shadow-lg p-4 flex gap-2 z-50">
-                                <button
-                                    class="primary-btn flex-1 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white py-3 rounded-lg font-semibold"
-                                    onclick="handleCTA()">
-                                    Start Free Trial
-                                </button>
-                                <button class="bg-gray-100 p-3 rounded-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="4" x2="20" y1="12" y2="12"></line>
-                                        <line x1="4" x2="20" y1="6" y2="6"></line>
-                                        <line x1="4" x2="20" y1="18" y2="18"></line>
-                                    </svg>
-                                </button>
-                            </div>
-                            
-                            <script>
-                                // Main initialization function to ensure proper loading order
-                                document.addEventListener('DOMContentLoaded', () => {
-                                    // Initialize the inline SVG icons
-                                    // If Lucide is available, use it, otherwise the inline SVGs will be visible
-                                    if (typeof lucide !== 'undefined') {
-                                        lucide.createIcons();
-                                    }
+                        </div>
 
-                                    // Make hero and CTA elements visible immediately
-                                    document.querySelectorAll('#hero-title, #hero-subtitle, #hero-buttons, #hero-badges, #hero-comparison, #cta-title, #cta-subtitle, #cta-button, #cta-badges').forEach(el => {
-                                        el.classList.add('active');
-                                    });
+                        <button type="button"
+                            class="w-full py-4 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white rounded-lg font-semibold">
+                            Start Free Trial
+                        </button>
 
-                                    // Set up the scroll-based animations
-                                    setupRevealAnimations();
+                        <div class="text-center mt-4 text-sm text-gray-500">
+                            By signing up, you agree to our Terms and Privacy Policy
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                    // Setup all other interactive elements
-                                    setupBookingSteps();
-                                    setupParallaxEffect();
-                                    setupCustomSelect();
-                                    setupModalHandling();
-                                    setupChatInteractions();
-                                    setupMagneticButtons();
-                                    setupHeroComparison();
+    <!-- Mobile sticky CTA bar -->
+    <div class="fixed bottom-0 left-0 right-0 lg:hidden bg-white shadow-lg p-4 flex gap-2 z-50">
+        <button
+            class="primary-btn flex-1 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white py-3 rounded-lg font-semibold"
+            onclick="handleCTA()">
+            Start Free Trial
+        </button>
+        <button class="bg-gray-100 p-3 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Main initialization function to ensure proper loading order
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the inline SVG icons
+            // If Lucide is available, use it, otherwise the inline SVGs will be visible
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Make hero and CTA elements visible immediately
+            document.querySelectorAll('#hero-title, #hero-subtitle, #hero-buttons, #hero-badges, #hero-comparison, #cta-title, #cta-subtitle, #cta-button, #cta-badges').forEach(el => {
+                el.classList.add('active');
+            });
+
+            // Set up the scroll-based animations
+            setupRevealAnimations();
+
+            // Setup all other interactive elements
+            setupBookingSteps();
+            setupParallaxEffect();
+            setupCustomSelect();
+            setupModalHandling();
+            setupChatInteractions();
+            setupMagneticButtons();
+            setupHeroComparison();
+        });
+
+        // Set up reveal animations for sections
+        function setupRevealAnimations() {
+            const revealElements = document.querySelectorAll('.reveal');
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Unobserve after revealing
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+        }
+
+        // Set up the booking steps animation - Modified to run twice only, then stop
+        function setupBookingSteps() {
+            const section = document.getElementById('how');
+            if (!section) return;
+
+            const timelineProgress = document.getElementById('timeline-progress');
+            const bookingSteps = document.querySelectorAll('.booking-step');
+
+            if (bookingSteps.length === 0 || !timelineProgress) return;
+
+            let currentStep = 0;
+            let cycleCount = 0;
+            let stepInterval = null;
+
+            // Function to highlight the current step
+            function highlightStep(stepIndex) {
+                // Reset all steps
+                bookingSteps.forEach((step) => {
+                    step.classList.remove('highlight');
+                });
+
+                // Highlight current step
+                bookingSteps[stepIndex].classList.add('highlight');
+
+                // Update progress bar
+                const progressWidth = ((stepIndex + 1) / bookingSteps.length) * 100;
+                timelineProgress.style.width = `${progressWidth}%`;
+            }
+
+            // Create observer to trigger animation when section is visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Start with first step
+                        highlightStep(0);
+
+                        // Set up interval to cycle through steps - only twice
+                        stepInterval = setInterval(() => {
+                            currentStep = (currentStep + 1) % bookingSteps.length;
+                            highlightStep(currentStep);
+
+                            // If we've completed a full cycle, increment the count
+                            if (currentStep === 0) {
+                                cycleCount++;
+                            }
+
+                            // After 2 full cycles, clear the interval and keep all steps highlighted
+                            if (cycleCount >= 2) {
+                                clearInterval(stepInterval);
+                                // After stopping, make all text readable
+                                bookingSteps.forEach((step) => {
+                                    step.querySelector('.content-container').style.opacity = '1';
                                 });
+                            }
+                        }, 3000);
 
-                                // Set up reveal animations for sections
-                                function setupRevealAnimations() {
-                                    const revealElements = document.querySelectorAll('.reveal');
+                        // Store interval ID to clear later
+                        section.dataset.intervalId = stepInterval;
+                    } else {
+                        // Clear interval when section is out of view
+                        if (section.dataset.intervalId) {
+                            clearInterval(parseInt(section.dataset.intervalId));
+                            section.dataset.intervalId = null;
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
 
-                                    const revealObserver = new IntersectionObserver((entries) => {
-                                        entries.forEach(entry => {
-                                            if (entry.isIntersecting) {
-                                                entry.target.classList.add('active');
-                                                // Unobserve after revealing
-                                                revealObserver.unobserve(entry.target);
-                                            }
-                                        });
-                                    }, {
-                                        threshold: 0.1,
-                                        rootMargin: '0px 0px -50px 0px'
-                                    });
+            // Start observing
+            observer.observe(section);
+        }
 
-                                    revealElements.forEach(el => {
-                                        revealObserver.observe(el);
-                                    });
-                                }
+        // Set up parallax effect for floating elements
+        function setupParallaxEffect() {
+            if (window.innerWidth <= 768) return; // Skip on mobile
 
-                                // Set up the booking steps animation - Modified to run twice only, then stop
-                                function setupBookingSteps() {
-                                    const section = document.getElementById('how');
-                                    if (!section) return;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
 
-                                    const timelineProgress = document.getElementById('timeline-progress');
-                                    const bookingSteps = document.querySelectorAll('.booking-step');
+            if (parallaxElements.length === 0) return;
 
-                                    if (bookingSteps.length === 0 || !timelineProgress) return;
+            // Handle mouse movement for parallax
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth - 0.5;
+                const mouseY = e.clientY / window.innerHeight - 0.5;
 
-                                    let currentStep = 0;
-                                    let cycleCount = 0;
-                                    let stepInterval = null;
+                parallaxElements.forEach(el => {
+                    const depth = el.getAttribute('data-depth') || 0.2;
+                    const moveX = mouseX * depth * 100;
+                    const moveY = mouseY * depth * 100;
 
-                                    // Function to highlight the current step
-                                    function highlightStep(stepIndex) {
-                                        // Reset all steps
-                                        bookingSteps.forEach((step) => {
-                                            step.classList.remove('highlight');
-                                        });
+                    // Use transform instead of setting x/y directly for better performance
+                    el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            });
+        }
 
-                                        // Highlight current step
-                                        bookingSteps[stepIndex].classList.add('highlight');
+        // Set up the hero comparison 3D effect
+        function setupHeroComparison() {
+            // Add mouse movement effect to the product image
+            const container = document.querySelector('.perspective-container');
+            const image = document.querySelector('.product-image');
 
-                                        // Update progress bar
-                                        const progressWidth = ((stepIndex + 1) / bookingSteps.length) * 100;
-                                        timelineProgress.style.width = `${progressWidth}%`;
-                                    }
+            if (container && image) {
+                container.addEventListener('mousemove', function (e) {
+                    const rect = container.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-                                    // Create observer to trigger animation when section is visible
-                                    const observer = new IntersectionObserver((entries) => {
-                                        entries.forEach(entry => {
-                                            if (entry.isIntersecting) {
-                                                // Start with first step
-                                                highlightStep(0);
+                    image.style.transform = `
+                                                                                                rotateY(${x * 5}deg) 
+                                                                                                rotateX(${-y * 5}deg) 
+                                                                                                translateZ(10px)
+                                                                                            `;
+                });
 
-                                                // Set up interval to cycle through steps - only twice
-                                                stepInterval = setInterval(() => {
-                                                    currentStep = (currentStep + 1) % bookingSteps.length;
-                                                    highlightStep(currentStep);
+                container.addEventListener('mouseleave', function () {
+                    image.style.transform = 'rotateY(-2deg) rotateX(1deg)';
+                });
+            }
+        }
 
-                                                    // If we've completed a full cycle, increment the count
-                                                    if (currentStep === 0) {
-                                                        cycleCount++;
-                                                    }
+        // Set up custom select dropdown
+        function setupCustomSelect() {
+            const customSelect = document.getElementById('custom-select');
+            const selectedText = document.getElementById('custom-select-selected');
+            const optionsContainer = document.getElementById('custom-select-items');
+            const options = document.querySelectorAll('.custom-select-item');
+            const hiddenSelect = document.getElementById('procedure-dropdown');
 
-                                                    // After 2 full cycles, clear the interval and keep all steps highlighted
-                                                    if (cycleCount >= 2) {
-                                                        clearInterval(stepInterval);
-                                                        // After stopping, make all text readable
-                                                        bookingSteps.forEach((step) => {
-                                                            step.querySelector('.content-container').style.opacity = '1';
-                                                        });
-                                                    }
-                                                }, 3000);
+            if (!customSelect || !selectedText || !optionsContainer || !options.length || !hiddenSelect) return;
 
-                                                // Store interval ID to clear later
-                                                section.dataset.intervalId = stepInterval;
-                                            } else {
-                                                // Clear interval when section is out of view
-                                                if (section.dataset.intervalId) {
-                                                    clearInterval(parseInt(section.dataset.intervalId));
-                                                    section.dataset.intervalId = null;
-                                                }
-                                            }
-                                        });
-                                    }, {
-                                        threshold: 0.3
-                                    });
+            // Toggle dropdown on click
+            selectedText.addEventListener('click', () => {
+                optionsContainer.classList.toggle('show');
+            });
 
-                                    // Start observing
-                                    observer.observe(section);
-                                }
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!customSelect.contains(e.target)) {
+                    optionsContainer.classList.remove('show');
+                }
+            });
 
-                                // Set up parallax effect for floating elements
-                                function setupParallaxEffect() {
-                                    if (window.innerWidth <= 768) return; // Skip on mobile
+            // Handle option selection
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    const value = option.getAttribute('data-value');
+                    const text = option.textContent;
 
-                                    const parallaxElements = document.querySelectorAll('.parallax-element');
+                    // Update selected text
+                    selectedText.querySelector('span').textContent = text;
 
-                                    if (parallaxElements.length === 0) return;
+                    // Update hidden native select
+                    hiddenSelect.value = value;
 
-                                    // Handle mouse movement for parallax
-                                    document.addEventListener('mousemove', (e) => {
-                                        const mouseX = e.clientX / window.innerWidth - 0.5;
-                                        const mouseY = e.clientY / window.innerHeight - 0.5;
+                    // Update styling
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
 
-                                        parallaxElements.forEach(el => {
-                                            const depth = el.getAttribute('data-depth') || 0.2;
-                                            const moveX = mouseX * depth * 100;
-                                            const moveY = mouseY * depth * 100;
+                    // Hide dropdown
+                    optionsContainer.classList.remove('show');
 
-                                            // Use transform instead of setting x/y directly for better performance
-                                            el.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                                        });
-                                    });
-                                }
+                    // Trigger confetti effect
+                    if (typeof confetti === 'function') {
+                        try {
+                            confetti({
+                                particleCount: 100,
+                                spread: 70,
+                                origin: { y: 0.6 },
+                                colors: ['#6B46C1', '#8B5CF6', '#3B82F6', '#10B981', '#EC4899']
+                            });
+                        } catch (e) {
+                            console.log('Confetti effect failed to run', e);
+                        }
+                    }
+                });
+            });
+        }
 
-                                // Set up the hero comparison 3D effect
-                                function setupHeroComparison() {
-                                    // Add mouse movement effect to the product image
-                                    const container = document.querySelector('.perspective-container');
-                                    const image = document.querySelector('.product-image');
+        // Set up modal functionality
+        function setupModalHandling() {
+            const modal = document.getElementById('signup-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const closeModalMobileBtn = document.getElementById('close-modal-mobile');
 
-                                    if (container && image) {
-                                        container.addEventListener('mousemove', function (e) {
-                                            const rect = container.getBoundingClientRect();
-                                            const x = (e.clientX - rect.left) / rect.width - 0.5;
-                                            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            if (!modal) return;
 
-                                            image.style.transform = `
-                                                                        rotateY(${x * 5}deg) 
-                                                                        rotateX(${-y * 5}deg) 
-                                                                        translateZ(10px)
-                                                                    `;
-                                        });
+            // Close button handlers
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                });
+            }
 
-                                        container.addEventListener('mouseleave', function () {
-                                            image.style.transform = 'rotateY(-2deg) rotateX(1deg)';
-                                        });
-                                    }
-                                }
+            if (closeModalMobileBtn) {
+                closeModalMobileBtn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                });
+            }
 
-                                // Set up custom select dropdown
-                                function setupCustomSelect() {
-                                    const customSelect = document.getElementById('custom-select');
-                                    const selectedText = document.getElementById('custom-select-selected');
-                                    const optionsContainer = document.getElementById('custom-select-items');
-                                    const options = document.querySelectorAll('.custom-select-item');
-                                    const hiddenSelect = document.getElementById('procedure-dropdown');
+            // Close modal when clicking outside content
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
 
-                                    if (!customSelect || !selectedText || !optionsContainer || !options.length || !hiddenSelect) return;
+        // Set up chat interactions for demo
+        function setupChatInteractions() {
+            const typingIndicator = document.querySelector('.typing-indicator');
+            if (!typingIndicator) return;
 
-                                    // Toggle dropdown on click
-                                    selectedText.addEventListener('click', () => {
-                                        optionsContainer.classList.toggle('show');
-                                    });
 
-                                    // Close dropdown when clicking outside
-                                    document.addEventListener('click', (e) => {
-                                        if (!customSelect.contains(e.target)) {
-                                            optionsContainer.classList.remove('show');
-                                        }
-                                    });
+        }
 
-                                    // Handle option selection
-                                    options.forEach(option => {
-                                        option.addEventListener('click', () => {
-                                            const value = option.getAttribute('data-value');
-                                            const text = option.textContent;
+        // Set up magnetic button effect
+        function setupMagneticButtons() {
+            const magneticButtons = document.querySelectorAll('.magnetic-btn');
 
-                                            // Update selected text
-                                            selectedText.querySelector('span').textContent = text;
+            magneticButtons.forEach(button => {
+                button.addEventListener('mousemove', (e) => {
+                    const rect = button.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
 
-                                            // Update hidden native select
-                                            hiddenSelect.value = value;
+                    button.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+                });
 
-                                            // Update styling
-                                            options.forEach(opt => opt.classList.remove('selected'));
-                                            option.classList.add('selected');
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = '';
+                });
+            });
+        }
 
-                                            // Hide dropdown
-                                            optionsContainer.classList.remove('show');
+        // CTA handler
+        function handleCTA(event) {
+            if (!event) event = window.event;
 
-                                            // Trigger confetti effect
-                                            if (typeof confetti === 'function') {
-                                                try {
-                                                    confetti({
-                                                        particleCount: 100,
-                                                        spread: 70,
-                                                        origin: { y: 0.6 },
-                                                        colors: ['#6B46C1', '#8B5CF6', '#3B82F6', '#10B981', '#EC4899']
-                                                    });
-                                                } catch (e) {
-                                                    console.log('Confetti effect failed to run', e);
-                                                }
-                                            }
-                                        });
-                                    });
-                                }
+            // Add spring animation to button
+            const target = event.target.closest('button') || event.target;
+            target.classList.add('spring');
 
-                                // Set up modal functionality
-                                function setupModalHandling() {
-                                    const modal = document.getElementById('signup-modal');
-                                    const closeModalBtn = document.getElementById('close-modal');
-                                    const closeModalMobileBtn = document.getElementById('close-modal-mobile');
+            // Create confetti effect if available
+            if (typeof confetti === 'function') {
+                try {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#6B46C1', '#8B5CF6', '#3B82F6', '#10B981', '#EC4899']
+                    });
+                } catch (e) {
+                    console.log('Confetti effect failed to run', e);
+                }
+            }
 
-                                    if (!modal) return;
+            // Reset spring animation and open modal after delay
+            setTimeout(() => {
+                target.classList.remove('spring');
+                // Show modal
+                const modal = document.getElementById('signup-modal');
+                if (modal) modal.classList.add('active');
+            }, 600);
 
-                                    // Close button handlers
-                                    if (closeModalBtn) {
-                                        closeModalBtn.addEventListener('click', () => {
-                                            modal.classList.remove('active');
-                                        });
-                                    }
+            if (event.preventDefault) event.preventDefault();
+            return false; // Prevent default
+        }
+    </script>
+</body>
 
-                                    if (closeModalMobileBtn) {
-                                        closeModalMobileBtn.addEventListener('click', () => {
-                                            modal.classList.remove('active');
-                                        });
-                                    }
-
-                                    // Close modal when clicking outside content
-                                    modal.addEventListener('click', (e) => {
-                                        if (e.target === modal) {
-                                            modal.classList.remove('active');
-                                        }
-                                    });
-                                }
-
-                                // Set up chat interactions for demo
-                                function setupChatInteractions() {
-                                    const typingIndicator = document.querySelector('.typing-indicator');
-                                    if (!typingIndicator) return;
-
-                                    // Simulate typing response after a delay
-                                    setTimeout(() => {
-                                        const parentElement = typingIndicator.parentElement;
-                                        if (parentElement) {
-                                            parentElement.innerHTML = "Yes, that's perfectly normal! Adult dogs sleep 12-14 hours a day. Puppies and seniors may sleep even more. 😊";
-                                        }
-                                    }, 2000);
-                                }
-
-                                // Set up magnetic button effect
-                                function setupMagneticButtons() {
-                                    const magneticButtons = document.querySelectorAll('.magnetic-btn');
-
-                                    magneticButtons.forEach(button => {
-                                        button.addEventListener('mousemove', (e) => {
-                                            const rect = button.getBoundingClientRect();
-                                            const x = e.clientX - rect.left - rect.width / 2;
-                                            const y = e.clientY - rect.top - rect.height / 2;
-
-                                            button.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-                                        });
-
-                                        button.addEventListener('mouseleave', () => {
-                                            button.style.transform = '';
-                                        });
-                                    });
-                                }
-
-                                // CTA handler
-                                function handleCTA(event) {
-                                    if (!event) event = window.event;
-
-                                    // Add spring animation to button
-                                    const target = event.target.closest('button') || event.target;
-                                    target.classList.add('spring');
-
-                                    // Create confetti effect if available
-                                    if (typeof confetti === 'function') {
-                                        try {
-                                            confetti({
-                                                particleCount: 100,
-                                                spread: 70,
-                                                origin: { y: 0.6 },
-                                                colors: ['#6B46C1', '#8B5CF6', '#3B82F6', '#10B981', '#EC4899']
-                                            });
-                                        } catch (e) {
-                                            console.log('Confetti effect failed to run', e);
-                                        }
-                                    }
-
-                                    // Reset spring animation and open modal after delay
-                                    setTimeout(() => {
-                                        target.classList.remove('spring');
-                                        // Show modal
-                                        const modal = document.getElementById('signup-modal');
-                                        if (modal) modal.classList.add('active');
-                                    }, 600);
-
-                                    if (event.preventDefault) event.preventDefault();
-                                    return false; // Prevent default
-                                }
-                            </script>
-                            </body>
-                            
-                            </html>
+</html>
