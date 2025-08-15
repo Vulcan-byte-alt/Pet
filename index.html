@@ -3084,89 +3084,7 @@
     
    
     
-    <!-- Add this script to your JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Function to handle video autoplay when in viewport
-            function handleVideoVisibility() {
-                const videoElement = document.getElementById('genz-video');
-                if (!videoElement) return;
-
-                // Create an intersection observer
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        // If video is in viewport
-                        if (entry.isIntersecting) {
-                            // Start playing the video
-                            videoElement.play().catch(e => {
-                                console.log("Autoplay prevented:", e);
-                                // Show a play button if autoplay is prevented
-                                if (e.name === "NotAllowedError") {
-                                    showPlayButton(videoElement);
-                                }
-                            });
-                        } else {
-                            // Pause the video when not in viewport to save resources
-                            videoElement.pause();
-                        }
-                    });
-                }, {
-                    root: null, // Use the viewport
-                    threshold: 0.5 // At least 50% of the video is visible
-                });
-
-                // Observe the video element
-                observer.observe(videoElement.parentElement);
-            }
-
-            // Function to display a play button if autoplay is prevented
-            function showPlayButton(videoElement) {
-                const container = videoElement.parentElement;
-
-                // Create play button element
-                const playButton = document.createElement('div');
-                playButton.className = 'absolute inset-0 flex items-center justify-center cursor-pointer';
-                playButton.innerHTML = `
-                <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                </div>
-            `;
-
-                // Add click event to play the video
-                playButton.addEventListener('click', () => {
-                    videoElement.play();
-                    playButton.remove();
-                });
-
-                // Add the button to the container
-                container.style.position = 'relative';
-                container.appendChild(playButton);
-            }
-
-            // Initialize video autoplay
-            handleVideoVisibility();
-
-            // Also handle the fullscreen video if enabled
-            const fullscreenVideo = document.getElementById('genz-video-fullscreen');
-            if (fullscreenVideo) {
-                const fullscreenObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            fullscreenVideo.play().catch(e => console.log("Fullscreen autoplay prevented:", e));
-                        } else {
-                            fullscreenVideo.pause();
-                        }
-                    });
-                }, {
-                    threshold: 0.3
-                });
-
-                fullscreenObserver.observe(fullscreenVideo.parentElement);
-            }
-        });
-    </script>
+    
     
     <!-- Add these styles to your CSS -->
     <style>
@@ -4391,6 +4309,89 @@
             if (event && event.preventDefault) event.preventDefault();
             return false; // Prevent default
         }
+    </script>
+    <!-- Add this script to your JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to handle video autoplay when in viewport
+            function handleVideoVisibility() {
+                const videoElement = document.getElementById('genz-video');
+                if (!videoElement) return;
+
+                // Create an intersection observer
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        // If video is in viewport
+                        if (entry.isIntersecting) {
+                            // Start playing the video
+                            videoElement.play().catch(e => {
+                                console.log("Autoplay prevented:", e);
+                                // Show a play button if autoplay is prevented
+                                if (e.name === "NotAllowedError") {
+                                    showPlayButton(videoElement);
+                                }
+                            });
+                        } else {
+                            // Pause the video when not in viewport to save resources
+                            videoElement.pause();
+                        }
+                    });
+                }, {
+                    root: null, // Use the viewport
+                    threshold: 0.5 // At least 50% of the video is visible
+                });
+
+                // Observe the video element
+                observer.observe(videoElement.parentElement);
+            }
+
+            // Function to display a play button if autoplay is prevented
+            function showPlayButton(videoElement) {
+                const container = videoElement.parentElement;
+
+                // Create play button element
+                const playButton = document.createElement('div');
+                playButton.className = 'absolute inset-0 flex items-center justify-center cursor-pointer';
+                playButton.innerHTML = `
+                    <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </div>
+                `;
+
+                // Add click event to play the video
+                playButton.addEventListener('click', () => {
+                    videoElement.play();
+                    playButton.remove();
+                });
+
+                // Add the button to the container
+                container.style.position = 'relative';
+                container.appendChild(playButton);
+            }
+
+            // Initialize video autoplay
+            handleVideoVisibility();
+
+            // Also handle the fullscreen video if enabled
+            const fullscreenVideo = document.getElementById('genz-video-fullscreen');
+            if (fullscreenVideo) {
+                const fullscreenObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            fullscreenVideo.play().catch(e => console.log("Fullscreen autoplay prevented:", e));
+                        } else {
+                            fullscreenVideo.pause();
+                        }
+                    });
+                }, {
+                    threshold: 0.3
+                });
+
+                fullscreenObserver.observe(fullscreenVideo.parentElement);
+            }
+        });
     </script>
 </body>
 
