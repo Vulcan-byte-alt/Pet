@@ -13,8 +13,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
         rel="stylesheet">
-    <!-- Cabinet Grotesk & Clash Display -->
-
     <!-- Lucide Icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.294.0/lucide.min.js"></script>
     <!-- For confetti effect -->
@@ -22,7 +20,6 @@
     <!-- GSAP for smooth animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
 
     <style>
         @font-face {
@@ -67,9 +64,6 @@
             font-style: normal;
             font-display: swap;
         }
-
-
-
 
         @font-face {
             font-family: 'PlusJakartaSans';
@@ -448,7 +442,9 @@
 
         @media (max-width: 639px) {
             .bento-grid-alt {
-                display: none;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 16px;
             }
         }
 
@@ -484,6 +480,17 @@
             .card-1x2 {
                 grid-column: span 2;
                 min-height: 250px;
+            }
+        }
+
+        @media (max-width: 639px) {
+
+            .card-2x2,
+            .card-2x1,
+            .card-1x2,
+            .card-1x1 {
+                grid-column: span 1;
+                min-height: auto;
             }
         }
 
@@ -601,7 +608,7 @@
             animation: crossOut 0.8s forwards;
         }
 
-        /* Mobile carousel */
+        /* Mobile carousel - MODIFIED FOR VERTICAL LAYOUT */
         .carousel {
             display: none;
         }
@@ -609,26 +616,18 @@
         @media (max-width: 639px) {
             .carousel {
                 display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
+                flex-direction: column;
+                gap: 16px;
                 padding: 16px 0;
             }
 
-            .carousel::-webkit-scrollbar {
-                display: none;
-            }
-
             .carousel-item {
-                flex: 0 0 auto;
-                width: 85%;
-                scroll-snap-align: center;
-                margin-right: 16px;
+                width: 100%;
+                margin-bottom: 16px;
             }
 
             .carousel-item:last-child {
-                margin-right: 0;
+                margin-bottom: 0;
             }
         }
 
@@ -912,6 +911,8 @@
             position: relative;
             cursor: pointer;
         }
+
+        
 
         .custom-select-selected {
             position: relative;
@@ -1419,6 +1420,315 @@
             font-weight: 600;
             margin-left: 0.5rem;
         }
+
+        /* MOBILE MENU IMPROVEMENTS */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(8px);
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(107, 70, 193, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .mobile-menu-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .mobile-menu-nav a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-menu-nav a:hover {
+            color: var(--hero-purple);
+        }
+
+        .mobile-menu-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--hero-purple);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-menu-nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            gap: 16px;
+        }
+
+        /* MOBILE ANIMATIONS */
+        @keyframes float-mobile {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media(max-width: 768px) {
+            .floating {
+                animation: float-mobile 4s ease-in-out infinite;
+            }
+
+            .float-delay-1 {
+                animation-delay: 0.3s;
+            }
+
+            .float-delay-2 {
+                animation-delay: 0.6s;
+            }
+
+            .float-delay-3 {
+                animation-delay: 0.9s;
+            }
+
+            .fade-in,
+            .fade-in-delay-1,
+            .fade-in-delay-2,
+            .fade-in-delay-3 {
+                opacity: 0;
+                animation: fadeIn 0.8s ease forwards;
+            }
+
+            .fade-in-delay-1 {
+                animation-delay: 0.1s;
+            }
+
+            .fade-in-delay-2 {
+                animation-delay: 0.2s;
+            }
+
+            .fade-in-delay-3 {
+                animation-delay: 0.3s;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            footer .grid {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            footer .flex.items-center.space-x-3 {
+                justify-content: center;
+            }
+
+            footer .flex.space-x-4 {
+                justify-content: center;
+            }
+
+            footer .border-t {
+                text-align: center;
+            }
+
+            footer .flex.flex-col.md\\:flex-row {
+                align-items: center;
+            }
+
+            footer .flex.items-center.gap-2 {
+                justify-content: center;
+                margin-top: 16px;
+            }
+        }
+
+        /* Mobile optimized hero */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 120px;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Enhanced mobile menu toggle button animation */
+        .hamburger {
+            width: 24px;
+            height: 18px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: var(--dark-text);
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2),
+        .hamburger span:nth-child(3) {
+            top: 8px;
+        }
+
+        .hamburger span:nth-child(4) {
+            top: 16px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        .hamburger.active span:nth-child(4) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+
+        /* PULSE ANIMATION FOR MOBILE ATTENTION */
+        @keyframes pulseBorder {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(107, 70, 193, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(107, 70, 193, 0);
+            }
+        }
+
+        .pulse-border {
+            animation: pulseBorder 2s infinite;
+        }
+
+        /* Mobile Bounce In Animation */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            70% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.8s forwards;
+        }
+
+        /* Mobile slide-in animation */
+        @keyframes slideInFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-right {
+            animation: slideInFromRight 0.5s forwards;
+        }
+
+        /* Enhanced mobile swipe effect */
+        @keyframes swipeReveal {
+            0% {
+                clip-path: inset(0 100% 0 0);
+            }
+
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .swipe-reveal {
+                animation: swipeReveal 0.6s forwards;
+            }
+        }
+
+
+        
     </style>
     <script>
         tailwind.config = {
@@ -1439,6 +1749,28 @@
 </head>
 
 <body>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-close" id="mobile-menu-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </div>
+        <nav class="mobile-menu-nav">
+            <a href="#features" class="slide-in-right" style="animation-delay: 0.1s;">Features</a>
+            <a href="#pricing" class="slide-in-right" style="animation-delay: 0.2s;">Pricing</a>
+            <a href="#how" class="slide-in-right" style="animation-delay: 0.3s;">How it Works</a>
+            <a href="#emergency" class="slide-in-right" style="animation-delay: 0.4s;">Emergency Care</a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <button class="text-purple-600 font-medium slide-in-right" style="animation-delay: 0.5s;">Login</button>
+            <button class="primary-btn py-3 px-6 pulse-border slide-in-right" style="animation-delay: 0.6s;"
+                onclick="handleCTA()">Get Started</button>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed w-full top-0 z-50 px-4 py-3">
         <div class="max-w-7xl mx-auto">
@@ -1456,7 +1788,14 @@
 
                 <div class="flex items-center space-x-6">
                     <button class="hidden md:block hover:text-purple-600 transition font-medium">Login</button>
-                    <button class="primary-btn magnetic-btn py-3 px-6">Get Started</button>
+                    <button class="primary-btn magnetic-btn py-3 px-6 hidden md:block">Get Started</button>
+                    <!-- Mobile menu toggle -->
+                    <div class="hamburger md:hidden" id="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1508,13 +1847,12 @@
                     <!-- Main comparison card -->
                     <div class="neo-brutal bg-white/90 backdrop-blur-md rounded-xl overflow-hidden">
                         <!-- Visual comparison with minimal text -->
-                        <div class="grid grid-cols-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2">
                             <!-- Traditional Vet Side -->
                             <div class="relative overflow-hidden">
                                 <!-- Sad pet image with overlay -->
                                 <div class="h-80 grayscale">
-                                    <img src="cat.jpg"
-                                        alt="Stressed cat" class="w-full h-full object-cover">
+                                    <img src="cat.jpg" alt="Stressed cat" class="w-full h-full object-cover">
                                     <div
                                         class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30 flex flex-col justify-end p-6">
                                         <h4 class="text-white text-2xl font-bold mb-1">Traditional Vet</h4>
@@ -1531,8 +1869,7 @@
                             <div class="relative overflow-hidden">
                                 <!-- Happy pet image with overlay -->
                                 <div class="h-80">
-                                    <img src="dog.jpg"
-                                        alt="Happy dog" class="w-full h-full object-cover">
+                                    <img src="dog.jpg" alt="Happy dog" class="w-full h-full object-cover">
                                     <div
                                         class="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-purple-700/30 flex flex-col justify-end p-6">
                                         <h4 class="text-white text-2xl font-bold mb-1">CREST.PET</h4>
@@ -1701,8 +2038,8 @@
 
                             <!-- AI response -->
                             <div class="chat-bubble bg-purple-100 max-w-[70%]">
-                                Yes, that's perfectly normal! Adult dogs sleep 12-14 hours a day. Puppies and seniors
-                                may sleep even more. 😊
+                                <p>Yes, that's perfectly normal! Adult dogs sleep 12-14 hours a day. Puppies and seniors
+                                    may sleep even more. 😊</p>
                             </div>
 
                             <!-- User typing animation -->
@@ -1842,10 +2179,10 @@
             </div>
         </div>
 
-        <!-- Mobile Carousel (visible on small screens only) -->
+        <!-- Mobile Carousel (MODIFIED FOR VERTICAL SCROLLING) -->
         <div class="carousel">
             <!-- 80% Cheaper Card -->
-            <div class="carousel-item">
+            <div class="carousel-item bounce-in" style="animation-delay: 0.1s;">
                 <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
                     <div class="absolute top-4 right-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -1866,7 +2203,7 @@
             </div>
 
             <!-- 24/7 AI Vet Card -->
-            <div class="carousel-item">
+            <div class="carousel-item bounce-in" style="animation-delay: 0.2s;">
                 <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
                     <div class="absolute top-4 right-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -1903,7 +2240,7 @@
             </div>
 
             <!-- Instant Booking Card -->
-            <div class="carousel-item">
+            <div class="carousel-item bounce-in" style="animation-delay: 0.3s;">
                 <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
                     <div class="absolute top-4 right-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -1951,7 +2288,7 @@
             </div>
 
             <!-- No Membership BS Card -->
-            <div class="carousel-item">
+            <div class="carousel-item bounce-in" style="animation-delay: 0.4s;">
                 <div class="card neo-brutal bg-white rounded-xl p-6 h-full relative">
                     <div class="absolute top-4 right-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -2006,8 +2343,7 @@
                         <div class="flex items-center mb-4">
                             <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="text-red-500">
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500">
                                     <path
                                         d="M15.6 10.8c1.2.49 2 1.7 2 3 0 1.8-1.46 3.3-3.3 3.3H10a4.28 4.28 0 0 1-4.3-4.3V5.2a2.2 2.2 0 0 1 4.3-.6">
                                     </path>
@@ -2057,7 +2393,7 @@
 
                     <div class="mt-8">
                         <h4 class="font-bold text-lg mb-4">Common Emergencies We Handle</h4>
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div class="emergency-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -2170,7 +2506,7 @@
                             </ul>
                             <div class="mt-3 font-medium">Recommendation: This requires prompt veterinary attention.
                                 Would you like to:
-                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                                     <button class="bg-red-600 text-white py-2 px-3 rounded-lg text-sm font-medium">Find
                                         Emergency Vet</button>
                                     <button
@@ -2184,9 +2520,7 @@
                     <div class="flex">
                         <input type="text" placeholder="Describe your emergency..."
                             class="flex-1 bg-gray-100 border-0 rounded-l-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <button
-                            class="bg-gradient-to-r from-red-500 to-purple-600 text-white rounded-r-lg px-4 py-3 font-medium">Get
-                            Help Now</button>
+                        
                     </div>
 
                     <div class="mt-6 text-center">
@@ -2217,8 +2551,8 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 reveal">
-                <div class="neo-brutal bg-white p-6 rounded-xl">
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-3 reveal">
+                <div class="neo-brutal bg-white p-6 rounded-xl swipe-reveal" style="animation-delay: 0.1s;">
                     <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -2277,7 +2611,7 @@
                     </div>
                 </div>
 
-                <div class="neo-brutal bg-white p-6 rounded-xl">
+                <div class="neo-brutal bg-white p-6 rounded-xl swipe-reveal" style="animation-delay: 0.2s;">
                     <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -2314,7 +2648,7 @@
                     </div>
                 </div>
 
-                <div class="neo-brutal bg-white p-6 rounded-xl">
+                <div class="neo-brutal bg-white p-6 rounded-xl swipe-reveal" style="animation-delay: 0.3s;">
                     <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -2381,7 +2715,7 @@
                     <div class="badge-red py-2 px-4">Symptoms</div>
                 </div>
 
-                <button class="primary-btn mt-8" onclick="handleCTA()">
+                <button class="primary-btn mt-8 pulse-border" onclick="handleCTA()">
                     Try Free - Track Your Pets
                     <span class="pill-badge bg-amber-100 text-amber-600">No card needed</span>
                 </button>
@@ -2403,9 +2737,9 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 reveal">
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-2 reveal">
                 <!-- Dr. Paw AI -->
-                <div class="neo-brutal bg-white p-8 rounded-xl">
+                <div class="neo-brutal bg-white p-8 rounded-xl bounce-in" style="animation-delay: 0.1s;">
                     <div class="flex items-center mb-6">
                         <div
                             class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
@@ -2501,7 +2835,7 @@
                         <p class="text-gray-700 mb-3">Our AI can see and analyze your pet through video calls and photos
                         </p>
 
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div class="flex items-start">
                                 <div
                                     class="w-6 h-6 rounded-full bg-purple-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
@@ -2558,7 +2892,7 @@
                 </div>
 
                 <!-- Marcia AI -->
-                <div class="neo-brutal bg-white p-8 rounded-xl">
+                <div class="neo-brutal bg-white p-8 rounded-xl bounce-in" style="animation-delay: 0.2s;">
                     <div class="flex items-center mb-6">
                         <div
                             class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
@@ -2634,7 +2968,7 @@
                         <h4 class="font-bold text-blue-800 mb-2">AI Agents Handle Everything For You</h4>
                         <p class="text-gray-700 mb-3">Our AI assistants act as your personal pet care coordinators</p>
 
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div class="flex items-start">
                                 <div
                                     class="w-6 h-6 rounded-full bg-blue-200 flex items-center justify-center mr-2 mt-1 flex-shrink-0">
@@ -2693,7 +3027,7 @@
             </div>
 
             <div class="mt-12 text-center reveal">
-                <button class="primary-btn" onclick="handleCTA()">
+                <button class="primary-btn pulse-border" onclick="handleCTA()">
                     Start Free Trial - Get Both AIs
                     <span class="pill-badge bg-amber-100 text-amber-600">No payment info required</span>
                 </button>
@@ -2701,6 +3035,167 @@
             </div>
         </div>
     </section>
+
+    <!-- Gen Z Video Section with Autoplay -->
+    <section class="py-20 px-6 lg:px-16 bg-gradient-to-b from-[#F8FAFC] to-[#EDF2F7] overflow-hidden relative">
+        <!-- Subtle background elements -->
+        <div class="absolute top-20 left-1/4 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-1/4 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl"></div>
+    
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-10 reveal">
+                <div class="inline-block bg-purple-100 text-purple-600 px-4 py-1 rounded-full font-medium mb-4">How Gen Z
+                    Cares For Pets</div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Pet care for the <span class="gradient-text">digital generation</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    See how today's pet parents use CREST.PET to keep their furry friends healthy
+                </p>
+            </div>
+    
+            <!-- Option 1: Contained Video with Autoplay -->
+            <div class="neo-brutal bg-white p-4 rounded-xl overflow-hidden reveal" id="video-container">
+                <!-- Direct HTML5 video that autoplays when in viewport -->
+                <div class="aspect-video w-full">
+                    <video id="genz-video" class="w-full h-full rounded-lg object-cover" muted loop playsinline
+                        preload="metadata">
+                        <!-- Replace this with your actual video file -->
+                        <source src="video.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+    
+                <!-- Optional caption or tagline -->
+                <div class="p-4 text-center">
+                    <p class="text-gray-600">"We designed CREST.PET to fit seamlessly into your digital lifestyle"</p>
+                </div>
+            </div>
+    
+            <!-- Simple CTA -->
+            <div class="text-center mt-10 reveal">
+                <button class="primary-btn" onclick="handleCTA()">
+                    Try It For Free
+                    <span class="pill-badge bg-amber-100 text-amber-600">30-day trial</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+   
+    
+    <!-- Add this script to your JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to handle video autoplay when in viewport
+            function handleVideoVisibility() {
+                const videoElement = document.getElementById('genz-video');
+                if (!videoElement) return;
+
+                // Create an intersection observer
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        // If video is in viewport
+                        if (entry.isIntersecting) {
+                            // Start playing the video
+                            videoElement.play().catch(e => {
+                                console.log("Autoplay prevented:", e);
+                                // Show a play button if autoplay is prevented
+                                if (e.name === "NotAllowedError") {
+                                    showPlayButton(videoElement);
+                                }
+                            });
+                        } else {
+                            // Pause the video when not in viewport to save resources
+                            videoElement.pause();
+                        }
+                    });
+                }, {
+                    root: null, // Use the viewport
+                    threshold: 0.5 // At least 50% of the video is visible
+                });
+
+                // Observe the video element
+                observer.observe(videoElement.parentElement);
+            }
+
+            // Function to display a play button if autoplay is prevented
+            function showPlayButton(videoElement) {
+                const container = videoElement.parentElement;
+
+                // Create play button element
+                const playButton = document.createElement('div');
+                playButton.className = 'absolute inset-0 flex items-center justify-center cursor-pointer';
+                playButton.innerHTML = `
+                <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </div>
+            `;
+
+                // Add click event to play the video
+                playButton.addEventListener('click', () => {
+                    videoElement.play();
+                    playButton.remove();
+                });
+
+                // Add the button to the container
+                container.style.position = 'relative';
+                container.appendChild(playButton);
+            }
+
+            // Initialize video autoplay
+            handleVideoVisibility();
+
+            // Also handle the fullscreen video if enabled
+            const fullscreenVideo = document.getElementById('genz-video-fullscreen');
+            if (fullscreenVideo) {
+                const fullscreenObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            fullscreenVideo.play().catch(e => console.log("Fullscreen autoplay prevented:", e));
+                        } else {
+                            fullscreenVideo.pause();
+                        }
+                    });
+                }, {
+                    threshold: 0.3
+                });
+
+                fullscreenObserver.observe(fullscreenVideo.parentElement);
+            }
+        });
+    </script>
+    
+    <!-- Add these styles to your CSS -->
+    <style>
+        /* Ensure videos work well on mobile */
+        @media (max-width: 640px) {
+            video {
+                height: auto;
+                max-height: 80vh;
+            }
+    
+            /* Better video controls for mobile */
+            video::-webkit-media-controls {
+                display: flex !important;
+                opacity: 1 !important;
+            }
+        }
+    
+        /* Only show video controls when hovering on desktop */
+        @media (min-width: 641px) {
+            video::-webkit-media-controls {
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+    
+            video:hover::-webkit-media-controls {
+                opacity: 1;
+            }
+        }
+    </style>
 
     <!-- AI Assistant Preview -->
     <section class="py-20 gradient-mesh relative overflow-hidden">
@@ -2713,7 +3208,7 @@
                     Get instant answers, diagnosis hints, and treatment options 24/7
                 </p>
             </div>
-
+    
             <div class="neo-brutal bg-white p-8 reveal">
                 <!-- Chat Header -->
                 <div class="flex items-center justify-between pb-4 border-b">
@@ -2732,25 +3227,23 @@
                     </div>
                     <div class="flex gap-2">
                         <button class="p-2 hover:bg-gray-100 rounded-lg transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path
                                     d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
                                 </path>
                             </svg>
                         </button>
                         <button class="p-2 hover:bg-gray-100 rounded-lg transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m22 8-6 4 6 4V8Z"></path>
                                 <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
                             </svg>
                         </button>
                     </div>
                 </div>
-
+    
                 <!-- Chat Messages -->
                 <div class="py-6 space-y-4 max-h-[400px] overflow-y-auto" id="chat-messages">
                     <div class="flex gap-3">
@@ -2760,14 +3253,14 @@
                             👋 Hi! I'm your AI vet assistant. How can I help with your pet today?
                         </div>
                     </div>
-
+    
                     <div class="flex gap-3 justify-end">
                         <div class="chat-bubble bg-gray-100 max-w-[70%]">
                             My cat has been sneezing a lot lately. Should I be worried?
                         </div>
                         <div class="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0"></div>
                     </div>
-
+    
                     <div class="flex gap-3">
                         <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex-shrink-0">
                         </div>
@@ -2782,7 +3275,7 @@
                                 video consultation? <strong>It's only $25 vs $150 at a traditional vet.</strong></p>
                         </div>
                     </div>
-
+    
                     <!-- User typing animation -->
                     <div class="flex gap-3 justify-end">
                         <div class="chat-bubble bg-gray-100 max-w-[70%] flex items-center">
@@ -2795,7 +3288,7 @@
                         <div class="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0"></div>
                     </div>
                 </div>
-
+    
                 <!-- Input Area -->
                 <div class="flex gap-2 pt-4 border-t">
                     <input type="text" placeholder="Ask anything about your pet..."
@@ -2809,11 +3302,12 @@
                     </button>
                 </div>
             </div>
-
-            <div class="mt-8 text-center">
-                <div class="bg-white rounded-lg p-4 shadow-md inline-block mb-6">
-                    <h4 class="font-bold mb-2">Popular Questions About Our Platform</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
+    
+            <!-- FIXED LAYOUT FOR FAQ AND CTA -->
+            <div class="mt-12 reveal">
+                <div class="bg-white rounded-lg p-6 shadow-md mb-8">
+                    <h4 class="font-bold mb-4 text-center md:text-left">Popular Questions About Our Platform</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <button class="p-3 bg-purple-50 rounded-lg text-left hover:bg-purple-100 transition">
                             What features do you have?
                         </button>
@@ -2828,11 +3322,13 @@
                         </button>
                     </div>
                 </div>
-
-                <button class="primary-btn mx-auto inline-block" onclick="handleCTA()">
-                    Try it free for 30 days
-                    <span class="pill-badge bg-amber-100 text-amber-600">No credit card</span>
-                </button>
+    
+                <div class="text-center">
+                    <button class="primary-btn mx-auto inline-flex items-center gap-2 pulse-border" onclick="handleCTA()">
+                        <span>Try it free for 30 days</span>
+                        <span class="pill-badge bg-amber-100 text-amber-600">No credit card</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -3011,7 +3507,7 @@
                 </div>
                 <p class="text-gray-600 mt-4">Based on average pet owner with 4 visits per year</p>
 
-                <button class="primary-btn mt-6" onclick="handleCTA()">
+                <button class="primary-btn mt-6 pulse-border" onclick="handleCTA()">
                     Start Free Trial Today
                     <span class="pill-badge bg-amber-100 text-amber-600">No card required</span>
                 </button>
@@ -3132,7 +3628,8 @@
 
             <div class="flex justify-center">
                 <button
-                    class="primary-btn glassmorphic px-8 py-4 rounded-xl bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white font-semibold flex items-center gap-2 text-lg mx-auto">
+                    class="primary-btn glassmorphic px-8 py-4 rounded-xl bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white font-semibold flex items-center gap-2 text-lg mx-auto pulse-border"
+                    onclick="handleCTA()">
                     Find care near you
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3153,7 +3650,7 @@
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 reveal">
                 <div class="neo-brutal bg-white p-6">
                     <div class="flex items-start gap-4">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200" alt="Customer"
@@ -3213,7 +3710,7 @@
                 30-day free trial. No credit card required. Cancel anytime.
             </p>
 
-            <button class="primary-btn text-lg px-12 py-5 mb-12 blur-reveal" id="cta-button" onclick="handleCTA()">
+            <button class="primary-btn text-lg px-12 py-5 mb-12 blur-reveal pulse-border" id="cta-button" onclick="handleCTA()">
                 <!-- Increased margin-bottom -->
                 Start Your Free Trial
             </button>
@@ -3245,13 +3742,13 @@
     <footer class="py-12 px-6 lg:px-16 bg-[#0F172A] text-white">
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div class="md:col-span-1">
-                    <div class="flex items-center space-x-3">
+                <div class="md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="flex items-center space-x-3 justify-center md:justify-start">
                         <img src="logo.png" alt="CREST.PET Logo" class="w-32 h-32 object-cover">
                     </div>
                     <p class="text-gray-400 mb-6">Modern pet care for the digital age. Save money, save time, love your
                         pet.</p>
-                    <div class="flex space-x-4">
+                    <div class="flex space-x-4 justify-center md:justify-start">
                         <a href="#"
                             class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6B46C1] transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -3283,7 +3780,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="text-center md:text-left">
                     <h4 class="text-lg font-bold mb-4">Services</h4>
                     <ul class="space-y-2">
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Online
@@ -3297,7 +3794,7 @@
                     </ul>
                 </div>
 
-                <div>
+                <div class="text-center md:text-left">
                     <h4 class="text-lg font-bold mb-4">Company</h4>
                     <ul class="space-y-2">
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
@@ -3308,7 +3805,7 @@
                     </ul>
                 </div>
 
-                <div>
+                <div class="text-center md:text-left">
                     <h4 class="text-lg font-bold mb-4">Legal</h4>
                     <ul class="space-y-2">
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
@@ -3323,10 +3820,10 @@
             </div>
 
             <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <div class="text-gray-400 mb-4 md:mb-0">
+                <div class="text-gray-400 mb-4 md:mb-0 text-center md:text-left">
                     &copy; 2025 CREST.PET. All rights reserved.
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 justify-center">
                     <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">Visa
                     </div>
                     <div class="w-12 h-8 bg-gray-700 rounded flex items-center justify-center text-white text-xs">MC
@@ -3475,7 +3972,7 @@
 
                         <div class="mb-6">
                             <label class="block text-sm font-medium mb-2">Pet type</label>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div
                                     class="border border-gray-200 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:border-[#6B46C1] transition-colors">
                                     <div
@@ -3533,22 +4030,7 @@
         </div>
     </div>
 
-    <!-- Mobile sticky CTA bar -->
-    <div class="fixed bottom-0 left-0 right-0 lg:hidden bg-white shadow-lg p-4 flex gap-2 z-50">
-        <button
-            class="primary-btn flex-1 bg-gradient-to-r from-[#6B46C1] to-[#8B5CF6] text-white py-3 rounded-lg font-semibold"
-            onclick="handleCTA()">
-            Start Free Trial
-        </button>
-        <button class="bg-gray-100 p-3 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="4" x2="20" y1="12" y2="12"></line>
-                <line x1="4" x2="20" y1="6" y2="6"></line>
-                <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg>
-        </button>
-    </div>
+    
 
     <script>
         // Main initialization function to ensure proper loading order
@@ -3575,6 +4057,7 @@
             setupChatInteractions();
             setupMagneticButtons();
             setupHeroComparison();
+            setupMobileMenu();
         });
 
         // Set up reveal animations for sections
@@ -3710,10 +4193,10 @@
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
                     image.style.transform = `
-                                                                                                rotateY(${x * 5}deg) 
-                                                                                                rotateX(${-y * 5}deg) 
-                                                                                                translateZ(10px)
-                                                                                            `;
+                        rotateY(${x * 5}deg) 
+                        rotateX(${-y * 5}deg) 
+                        translateZ(10px)
+                    `;
                 });
 
                 container.addEventListener('mouseleave', function () {
@@ -3813,8 +4296,6 @@
         function setupChatInteractions() {
             const typingIndicator = document.querySelector('.typing-indicator');
             if (!typingIndicator) return;
-
-
         }
 
         // Set up magnetic button effect
@@ -3823,6 +4304,8 @@
 
             magneticButtons.forEach(button => {
                 button.addEventListener('mousemove', (e) => {
+                    if (window.innerWidth <= 768) return; // Skip on mobile
+
                     const rect = button.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
@@ -3836,13 +4319,52 @@
             });
         }
 
+        // Set up mobile menu
+        function setupMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuToggleBottom = document.getElementById('mobile-menu-toggle-bottom');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+            if (!mobileMenu || !mobileMenuToggle) return;
+
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+            });
+
+            if (mobileMenuToggleBottom) {
+                mobileMenuToggleBottom.addEventListener('click', () => {
+                    mobileMenu.classList.add('active');
+                    mobileMenuToggle.classList.add('active');
+                });
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                });
+            }
+
+            // Close mobile menu when clicking on menu links
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                });
+            });
+        }
+
         // CTA handler
         function handleCTA(event) {
             if (!event) event = window.event;
 
             // Add spring animation to button
-            const target = event.target.closest('button') || event.target;
-            target.classList.add('spring');
+            const target = event ? (event.target.closest('button') || event.target) : document.querySelector('.primary-btn');
+            if (target) target.classList.add('spring');
 
             // Create confetti effect if available
             if (typeof confetti === 'function') {
@@ -3860,13 +4382,13 @@
 
             // Reset spring animation and open modal after delay
             setTimeout(() => {
-                target.classList.remove('spring');
+                if (target) target.classList.remove('spring');
                 // Show modal
                 const modal = document.getElementById('signup-modal');
                 if (modal) modal.classList.add('active');
             }, 600);
 
-            if (event.preventDefault) event.preventDefault();
+            if (event && event.preventDefault) event.preventDefault();
             return false; // Prevent default
         }
     </script>
