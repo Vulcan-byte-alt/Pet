@@ -1450,123 +1450,128 @@
 
         /* MOBILE MENU IMPROVEMENTS */
         .mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(15, 23, 42, 0.65); /* Subtle dark background */
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: translateY(-100%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    backdrop-filter: blur(20px); /* Apple-style strong blur */
-    -webkit-backdrop-filter: blur(20px); /* For Safari */
-}
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(15, 23, 42, 0.65);
+            /* Subtle dark background */
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(20px);
+            /* Apple-style strong blur */
+            -webkit-backdrop-filter: blur(20px);
+            /* For Safari */
+        }
 
-.mobile-menu.active {
-    transform: translateY(0);
-}
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
 
-.mobile-menu-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1); /* Subtle glass background */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 0.5px solid rgba(255, 255, 255, 0.2); /* Apple-style thin border */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Subtle glass background */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 0.5px solid rgba(255, 255, 255, 0.2);
+            /* Apple-style thin border */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
 
-.mobile-menu-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-}
+        .mobile-menu-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
 
-.mobile-menu-nav a {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: white;
-    position: relative;
-    transition: color 0.2s ease;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
-}
+        .mobile-menu-nav a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            position: relative;
+            transition: color 0.2s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            /* Subtle text shadow */
+        }
 
-.mobile-menu-nav a:hover {
-    color: var(--hero-purple-light);
-}
+        .mobile-menu-nav a:hover {
+            color: var(--hero-purple-light);
+        }
 
-.mobile-menu-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--hero-purple-light);
-    transition: width 0.3s ease;
-}
+        .mobile-menu-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--hero-purple-light);
+            transition: width 0.3s ease;
+        }
 
-.mobile-menu-nav a:hover::after {
-    width: 100%;
-}
+        .mobile-menu-nav a:hover::after {
+            width: 100%;
+        }
 
-.mobile-menu-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 40px;
-    gap: 16px;
-}
+        .mobile-menu-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            gap: 16px;
+        }
 
-/* Apple-style glassmorphic login button with purple fill */
-.mobile-menu-footer button.text-purple-600 {
-    background: rgba(107, 70, 193, 0.7); /* Semi-transparent purple */
-    color: white;
-    padding: 10px 24px;
-    border-radius: 14px; /* More rounded corners like Apple */
-    font-weight: 500;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 0.5px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-}
+        /* Login button as just purple text, no background */
+        .mobile-menu-footer button.text-purple-600 {
+            color: var(--hero-purple-light);
+            /* Bright purple text */
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+            /* Subtle glow effect */
+        }
 
-.mobile-menu-footer button.text-purple-600:hover {
-    background: rgba(139, 92, 246, 0.8); /* Brighter purple on hover */
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
+        .mobile-menu-footer button.text-purple-600:hover {
+            color: var(--hero-purple-light);
+            text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+            /* Enhanced glow on hover */
+            transform: translateY(-1px);
+        }
 
-/* Enhanced CTA button */
-.mobile-menu-footer .primary-btn {
-    border-radius: 14px; /* Match Apple's rounded style */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 0.5px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 6px 16px rgba(107, 70, 193, 0.3);
-    transition: all 0.3s ease;
-}
+        /* Enhanced CTA button */
+        .mobile-menu-footer .primary-btn {
+            border-radius: 14px;
+            /* Match Apple's rounded style */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 0.5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 16px rgba(107, 70, 193, 0.3);
+            transition: all 0.3s ease;
+        }
 
-.mobile-menu-footer .primary-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(107, 70, 193, 0.4);
-}
+        .mobile-menu-footer .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(107, 70, 193, 0.4);
+        }
 
         /* MOBILE ANIMATIONS */
         @keyframes float-mobile {
